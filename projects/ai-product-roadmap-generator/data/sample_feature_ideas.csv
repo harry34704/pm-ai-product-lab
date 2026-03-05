@@ -1,0 +1,11 @@
+feature,description,reach,impact,confidence,effort,strategic_fit,feedback_volume
+Slack anomaly alerts,Notify teams when KPIs drop unexpectedly,800,4.5,0.8,4,5,48
+Collaborative roadmap comments,Allow product teams to discuss roadmap items directly,520,3.8,0.75,3,4,33
+Guided onboarding checklist,Help new accounts complete key setup steps faster,950,4.7,0.85,5,5,57
+Forecasted analytics,Project DAU and conversion trends automatically,430,3.6,0.7,6,4,29
+Salesforce sync,Push account-level analytics into CRM workflows,390,3.9,0.72,5,4,24
+Template gallery,Provide reusable dashboard templates,610,3.2,0.8,2,3,18
+Experiment win-loss digest,Summarize experiment outcomes weekly,350,2.9,0.78,2,3,16
+Mobile dashboard performance,Improve report rendering speed on phones,700,4.2,0.82,4,4,41
+Advanced permissions,Control workspace access by role and team,460,3.4,0.76,4,4,22
+

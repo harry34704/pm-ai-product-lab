@@ -1,0 +1,6 @@
+product,category,primary_user,business_model,core_moat,headline_strength,headline_risk
+Netflix,Streaming,Consumers,Subscription + Ads,Personalization and content library,Global on-demand entertainment,High content cost structure
+Uber,Mobility,Riders and drivers,Transaction take rate,Marketplace liquidity,Instant transportation access,Supply-demand imbalance
+Airbnb,Travel,Guests and hosts,Booking fees,Global supply and trust layer,Unique lodging inventory,Trust and regulatory exposure
+Stripe,Fintech,Developers and finance teams,Payments take rate + software,Developer platform breadth,Fast internet business setup,Complex compliance burden
+OpenAI,AI Platform,Consumers developers and enterprises,Subscriptions + API + enterprise contracts,Model capability and ecosystem,General-purpose AI utility,High inference and safety costs

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#08111f" rx="40" />
+  <circle cx="1160" cy="160" r="210" fill="rgba(251,146,60,0.15)" />
+  <rect x="82" y="74" width="1276" height="90" rx="28" fill="rgba(255,255,255,0.07)" />
+  <text x="124" y="132" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="36" font-weight="700">Product A/B Testing Engine</text>
+  <rect x="92" y="214" width="432" height="584" rx="34" fill="#f8fafc" />
+  <text x="130" y="264" fill="#0f766e" font-family="Space Grotesk, Arial, sans-serif" font-size="24" font-weight="700">Experiment Setup</text>
+  <rect x="130" y="302" width="348" height="66" rx="20" fill="#e2e8f0" />
+  <rect x="130" y="392" width="348" height="98" rx="24" fill="#ecfeff" />
+  <rect x="130" y="520" width="164" height="56" rx="18" fill="#ecfeff" />
+  <rect x="314" y="520" width="164" height="56" rx="18" fill="#ecfeff" />
+  <rect x="130" y="614" width="184" height="66" rx="33" fill="#14b8a6" />
+  <text x="164" y="654" fill="#08111f" font-family="Space Grotesk, Arial, sans-serif" font-size="22" font-weight="700">Save experiment</text>
+  <rect x="558" y="214" width="798" height="584" rx="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" />
+  <rect x="598" y="256" width="222" height="132" rx="24" fill="#ffffff" />
+  <rect x="844" y="256" width="222" height="132" rx="24" fill="#ffffff" />
+  <rect x="1090" y="256" width="226" height="132" rx="24" fill="#ffffff" />
+  <text x="632" y="312" fill="#64748b" font-family="Manrope, Arial, sans-serif" font-size="18">Control conversion</text>
+  <text x="648" y="360" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="42" font-weight="700">8.6%</text>
+  <text x="876" y="312" fill="#64748b" font-family="Manrope, Arial, sans-serif" font-size="18">Variant conversion</text>
+  <text x="894" y="360" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="42" font-weight="700">10.1%</text>
+  <text x="1120" y="312" fill="#64748b" font-family="Manrope, Arial, sans-serif" font-size="18">P-value</text>
+  <text x="1134" y="360" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="42" font-weight="700">0.03</text>
+  <rect x="598" y="430" width="344" height="322" rx="28" fill="#ffffff" />
+  <rect x="966" y="430" width="350" height="322" rx="28" fill="#ffffff" />
+  <rect x="646" y="556" width="84" height="140" rx="22" fill="#0f766e" />
+  <rect x="760" y="516" width="84" height="180" rx="22" fill="#14b8a6" />
+  <circle cx="1142" cy="584" r="118" fill="#ecfeff" stroke="#14b8a6" stroke-width="22" stroke-dasharray="520 120" />
+  <text x="1100" y="598" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="48" font-weight="700">+17%</text>
+</svg>
+

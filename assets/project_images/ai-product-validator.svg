@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#08111f" rx="40" />
+  <circle cx="1210" cy="120" r="200" fill="rgba(20,184,166,0.15)" />
+  <rect x="72" y="70" width="1296" height="88" rx="28" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.1)" />
+  <text x="118" y="124" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="36" font-weight="700">AI Product Validator</text>
+  <text x="118" y="206" fill="#14b8a6" font-family="Space Grotesk, Arial, sans-serif" font-size="22" font-weight="700">IDEA INTAKE</text>
+  <rect x="90" y="236" width="438" height="530" rx="34" fill="#f8fafc" />
+  <rect x="126" y="282" width="364" height="86" rx="24" fill="#e2e8f0" />
+  <rect x="126" y="396" width="364" height="56" rx="20" fill="#ecfeff" />
+  <rect x="126" y="476" width="364" height="56" rx="20" fill="#ecfeff" />
+  <rect x="126" y="558" width="196" height="62" rx="31" fill="#14b8a6" />
+  <text x="146" y="336" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="26">AI compliance assistant for fintech ops teams</text>
+  <text x="146" y="432" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="22">Target customer: Mid-market fintech operators</text>
+  <text x="146" y="512" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="22">Business model: B2B SaaS subscription</text>
+  <text x="184" y="598" fill="#07111f" font-family="Space Grotesk, Arial, sans-serif" font-size="22" font-weight="700">Run Analysis</text>
+  <text x="592" y="206" fill="#fb923c" font-family="Space Grotesk, Arial, sans-serif" font-size="22" font-weight="700">ANALYSIS DASHBOARD</text>
+  <rect x="562" y="236" width="806" height="530" rx="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" />
+  <rect x="600" y="278" width="208" height="130" rx="26" fill="#ffffff" />
+  <rect x="832" y="278" width="208" height="130" rx="26" fill="#ffffff" />
+  <rect x="1064" y="278" width="246" height="130" rx="26" fill="#ffffff" />
+  <text x="630" y="328" fill="#64748b" font-family="Manrope, Arial, sans-serif" font-size="20">Viability score</text>
+  <text x="644" y="378" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="48" font-weight="700">82</text>
+  <text x="860" y="328" fill="#64748b" font-family="Manrope, Arial, sans-serif" font-size="20">Market opportunity</text>
+  <text x="888" y="378" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="48" font-weight="700">79</text>
+  <text x="1092" y="328" fill="#64748b" font-family="Manrope, Arial, sans-serif" font-size="20">Competitors</text>
+  <text x="1090" y="378" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="48" font-weight="700">3</text>
+  <rect x="600" y="442" width="324" height="284" rx="28" fill="#ffffff" />
+  <rect x="944" y="442" width="366" height="284" rx="28" fill="#ffffff" />
+  <text x="628" y="486" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="28" font-weight="700">SWOT</text>
+  <text x="628" y="532" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="20">Strengths • Narrow ICP</text>
+  <text x="628" y="568" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="20">Weaknesses • Differentiation proof</text>
+  <text x="628" y="604" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="20">Opportunities • Expanding compliance workflow</text>
+  <text x="628" y="640" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="20">Threats • Fast-moving incumbents</text>
+  <text x="972" y="486" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="28" font-weight="700">Scoring rationale</text>
+  <rect x="982" y="540" width="42" height="110" rx="14" fill="#14b8a6" />
+  <rect x="1052" y="500" width="42" height="150" rx="14" fill="#0f766e" />
+  <rect x="1122" y="470" width="42" height="180" rx="14" fill="#fb923c" />
+  <rect x="1192" y="430" width="42" height="220" rx="14" fill="#f59e0b" />
+</svg>
+

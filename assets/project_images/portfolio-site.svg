@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#07111f" rx="40" />
+  <circle cx="1230" cy="110" r="220" fill="rgba(251,146,60,0.16)" />
+  <circle cx="220" cy="120" r="240" fill="rgba(20,184,166,0.14)" />
+  <rect x="70" y="70" width="1300" height="76" rx="24" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.1)" />
+  <text x="118" y="118" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="34" font-weight="700">PM AI Product Lab</text>
+  <text x="830" y="118" fill="#94a3b8" font-family="Manrope, Arial, sans-serif" font-size="24">Home   About   Projects   LinkedIn</text>
+  <text x="92" y="262" fill="#14b8a6" font-family="Space Grotesk, Arial, sans-serif" font-size="24" font-weight="700">Harry Munyai</text>
+  <text x="92" y="350" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="78" font-weight="700">Product Manager</text>
+  <text x="92" y="430" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="78" font-weight="700">Business Analyst</text>
+  <text x="92" y="510" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="78" font-weight="700">AI Product Builder</text>
+  <text x="92" y="580" fill="#bfd0e3" font-family="Manrope, Arial, sans-serif" font-size="28">
+    Modern portfolio website with project cards, detail pages, and GitHub Pages deployment.
+  </text>
+  <rect x="92" y="626" width="204" height="70" rx="35" fill="#14b8a6" />
+  <rect x="316" y="626" width="224" height="70" rx="35" fill="transparent" stroke="rgba(255,255,255,0.24)" />
+  <text x="140" y="672" fill="#07111f" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800">View Projects</text>
+  <text x="364" y="672" fill="#f8fafc" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="700">LinkedIn Profile</text>
+  <rect x="860" y="198" width="420" height="332" rx="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" />
+  <rect x="900" y="242" width="340" height="224" rx="28" fill="#10253b" />
+  <circle cx="1070" cy="330" r="88" fill="#f0e3d3" />
+  <rect x="952" y="390" width="236" height="50" rx="25" fill="#14b8a6" opacity="0.85" />
+  <rect x="70" y="748" width="380" height="110" rx="30" fill="#ffffff" />
+  <rect x="490" y="748" width="380" height="110" rx="30" fill="#ffffff" />
+  <rect x="910" y="748" width="380" height="110" rx="30" fill="#ffffff" />
+  <text x="102" y="804" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700">AI Product Validator</text>
+  <text x="524" y="804" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700">Analytics Dashboard</text>
+  <text x="944" y="804" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700">Customer Insights</text>
+</svg>

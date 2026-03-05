@@ -1,0 +1,17 @@
+ticket_id,created_at,channel,customer_tier,subject,description
+T001,2026-01-04T09:10:00,email,pro,Dashboard loading slowly,The analytics dashboard is slow and sometimes throws an error when I switch date ranges.
+T002,2026-01-05T10:45:00,chat,free,Please add Slack alerts,Would love Slack notifications when a weekly KPI drops below target.
+T003,2026-01-06T08:30:00,email,enterprise,Invite flow confusing,Our admin could not finish workspace setup because the invite email never arrived.
+T004,2026-01-07T14:05:00,chat,pro,Mobile app crash,The iOS app crash happens every time I open the saved dashboard tab.
+T005,2026-01-08T11:20:00,email,free,Great onboarding,The new setup checklist was easy and smooth to complete.
+T006,2026-01-10T16:15:00,email,enterprise,HubSpot integration failed,The HubSpot sync failed twice and now the integration page is broken.
+T007,2026-01-12T09:50:00,chat,pro,Need custom report exports,Feature request: could you add CSV export scheduling for reports.
+T008,2026-01-14T13:40:00,email,free,Billing page confusing,The pricing screen is confusing and I cannot find the invoice download option.
+T009,2026-01-16T12:10:00,chat,pro,Alert emails too noisy,The alert emails are helpful but there are too many reminders for the same metric.
+T010,2026-01-18T10:35:00,email,enterprise,Please add Salesforce sync,It would help if we could push experiment data into Salesforce automatically.
+T011,2026-01-20T15:10:00,chat,pro,Chart rendering bug,The funnel chart looks broken after the most recent release.
+T012,2026-01-22T08:55:00,email,free,Android app is slow,The mobile app is frustratingly slow on Android when opening shared reports.
+T013,2026-01-24T09:25:00,chat,enterprise,Excellent support,Your support team was great and the API docs were easy to follow.
+T014,2026-01-26T11:00:00,email,pro,Need roadmap comments,Please add commenting on roadmap items so my team can review feature ideas.
+T015,2026-01-28T14:20:00,chat,free,Login issue,Users cannot login after resetting their password and the page shows a failed session message.
+T016,2026-01-30T17:05:00,email,enterprise,Better forecast metrics,Would love a feature that forecasts DAU and conversion trends automatically.

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harry Munyai | PM AI Product Lab</title>
+    <meta
+      name="description"
+      content="Portfolio website for Harry Munyai, showcasing product analytics, AI experimentation, automation platforms, and PM-focused data products."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="home">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="container nav-shell">
+          <a class="brand" href="#home">
+            <span class="brand-mark">PM</span>
+            <span>AI Product Lab</span>
+          </a>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+          </button>
+          <nav class="site-nav">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="YOUR_LINKEDIN_URL" target="_blank" rel="noreferrer">LinkedIn</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero-section" id="home">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow">Harry Munyai</p>
+              <h1>Product Manager | Business Analyst | AI Product Builder</h1>
+              <p class="hero-intro">
+                I design data-driven digital products, build AI experimentation
+                platforms, and explore automation systems that solve real business
+                problems.
+              </p>
+              <div class="hero-actions">
+                <a class="button primary" href="#projects">View Projects</a>
+                <a
+                  class="button secondary"
+                  href="YOUR_LINKEDIN_URL"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn Profile
+                </a>
+              </div>
+              <div class="hero-stats">
+                <div class="stat-card">
+                  <span class="stat-value">7</span>
+                  <span class="stat-label">Portfolio projects</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">AI + PM</span>
+                  <span class="stat-label">Applied product experiments</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">Local-first</span>
+                  <span class="stat-label">Runnable demos with sample data</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="profile-card">
+                <div class="profile-image-wrap">
+                  <img src="assets/profile.jpg" alt="Harry Munyai profile portrait" />
+                </div>
+                <div class="profile-copy">
+                  <p class="profile-role">Portfolio Focus</p>
+                  <h2>AI products, analytics systems, and operational tooling</h2>
+                  <p>
+                    Product-led experiments across fintech, automation, decision
+                    intelligence, and business workflow design.
+                  </p>
+                </div>
+              </div>
+              <div class="spotlight-card" id="featured-project-card"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="about-section" id="about">
+          <div class="container section-grid">
+            <div class="section-heading">
+              <p class="eyebrow">About</p>
+              <h2>Product strategy grounded in data and execution</h2>
+            </div>
+            <div class="about-content">
+              <p>
+                Product manager with experience across product analytics, fintech
+                systems, automation workflows, and AI product experimentation. The
+                lab is designed to show how I think: identify a decision, structure
+                the data, build the smallest useful system, and communicate the
+                tradeoffs clearly.
+              </p>
+              <div class="focus-grid">
+                <article class="focus-card">
+                  <h3>Experience Areas</h3>
+                  <ul>
+                    <li>Product analytics</li>
+                    <li>Fintech systems</li>
+                    <li>Automation workflows</li>
+                    <li>AI product experimentation</li>
+                  </ul>
+                </article>
+                <article class="focus-card">
+                  <h3>Focus Areas</h3>
+                  <div class="tag-row">
+                    <span>AI products</span>
+                    <span>Product analytics</span>
+                    <span>Automation platforms</span>
+                    <span>Digital payments</span>
+                    <span>Decision intelligence</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="projects-section" id="projects">
+          <div class="container">
+            <div class="section-heading section-heading-inline">
+              <div>
+                <p class="eyebrow">Projects</p>
+                <h2>AI product experiments and analytics tools</h2>
+              </div>
+              <a class="text-link" href="project.html?slug=ai-product-validator">
+                Open a featured project
+              </a>
+            </div>
+            <div class="projects-grid" id="projects-grid"></div>
+          </div>
+        </section>
+
+        <section class="systems-section">
+          <div class="container systems-grid">
+            <article class="systems-card">
+              <p class="eyebrow">Documentation</p>
+              <h2>Architecture and product philosophy are included</h2>
+              <p>
+                The repository documents how the apps are structured and the product
+                principles behind them, so the work is presentable as both code and
+                product thinking.
+              </p>
+              <div class="inline-links">
+                <a href="docs/architecture.md">Architecture</a>
+                <a href="docs/product-philosophy.md">Product Philosophy</a>
+              </div>
+            </article>
+            <article class="systems-card accent">
+              <p class="eyebrow">GitHub Pages</p>
+              <h2>Static portfolio site with automatic deployment</h2>
+              <p>
+                The site is configured for GitHub Pages using GitHub Actions, making
+                the portfolio easy to publish and maintain alongside the project code.
+              </p>
+              <a class="button tertiary" href="README.md">Deployment Instructions</a>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-shell">
+          <p>Harry Munyai • Product Manager • Business Analyst • AI Product Builder</p>
+          <p id="footer-year"></p>
+        </div>
+      </footer>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,12 @@
+date,experiment_name,variant,visitors,conversions,segment
+2026-02-01,checkout-copy-test,A,1200,102,new_users
+2026-02-01,checkout-copy-test,B,1180,121,new_users
+2026-02-02,checkout-copy-test,A,980,81,returning_users
+2026-02-02,checkout-copy-test,B,995,101,returning_users
+2026-02-03,checkout-copy-test,A,1110,95,mobile
+2026-02-03,checkout-copy-test,B,1105,113,mobile
+2026-02-04,onboarding-email-nudge,A,1300,338,new_users
+2026-02-04,onboarding-email-nudge,B,1295,363,new_users
+2026-02-05,onboarding-email-nudge,A,1240,302,returning_users
+2026-02-05,onboarding-email-nudge,B,1235,329,returning_users
+

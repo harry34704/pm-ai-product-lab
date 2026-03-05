@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Harry Munyai Portrait Artwork</title>
+  <desc id="desc">Abstract portrait artwork with the initials HM.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1323" />
+      <stop offset="100%" stop-color="#13314a" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+  </defs>
+  <rect width="900" height="900" fill="url(#bg)" rx="80" />
+  <circle cx="450" cy="315" r="180" fill="rgba(20,184,166,0.14)" />
+  <circle cx="450" cy="315" r="134" fill="#fdebd6" />
+  <path d="M300 690c42-132 148-200 306-200 128 0 216 52 260 154v46H34v-24c42-36 78-38 266 24z" fill="#10263d" />
+  <path d="M302 304c18-82 78-130 148-130 74 0 140 42 156 136-36-18-74-26-120-26-62 0-120 12-184 20z" fill="#071420" />
+  <path d="M356 354c18-32 52-48 96-48 46 0 82 18 104 54-8 56-34 98-104 98-72 0-96-48-96-104z" fill="#f4d4b5" />
+  <circle cx="410" cy="336" r="10" fill="#0b1323" />
+  <circle cx="496" cy="336" r="10" fill="#0b1323" />
+  <path d="M402 390c24 18 72 18 96 0" fill="none" stroke="#0b1323" stroke-width="12" stroke-linecap="round" />
+  <path d="M266 758c42-120 124-184 242-184 138 0 224 60 274 184" fill="none" stroke="url(#accent)" stroke-width="32" stroke-linecap="round" />
+  <rect x="92" y="82" width="244" height="92" rx="24" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" />
+  <text x="122" y="138" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="44" font-weight="700">Harry Munyai</text>
+  <rect x="596" y="700" width="188" height="92" rx="26" fill="url(#accent)" />
+  <text x="650" y="760" fill="#08111f" font-family="Space Grotesk, Arial, sans-serif" font-size="54" font-weight="700">HM</text>
+</svg>
+

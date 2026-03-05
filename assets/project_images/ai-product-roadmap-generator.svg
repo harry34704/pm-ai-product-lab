@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#08111f" rx="40" />
+  <circle cx="1220" cy="150" r="220" fill="rgba(249,115,22,0.16)" />
+  <rect x="82" y="76" width="1276" height="92" rx="28" fill="rgba(255,255,255,0.07)" />
+  <text x="124" y="134" fill="#f8fafc" font-family="Space Grotesk, Arial, sans-serif" font-size="36" font-weight="700">AI Product Roadmap Generator</text>
+  <rect x="92" y="214" width="1260" height="588" rx="34" fill="#f8fafc" />
+  <rect x="130" y="252" width="346" height="506" rx="28" fill="#fff7ed" />
+  <text x="164" y="304" fill="#9a3412" font-family="Space Grotesk, Arial, sans-serif" font-size="24" font-weight="700">Planning Inputs</text>
+  <rect x="164" y="348" width="278" height="86" rx="22" fill="#fed7aa" />
+  <rect x="164" y="458" width="278" height="86" rx="22" fill="#fed7aa" />
+  <rect x="164" y="568" width="278" height="86" rx="22" fill="#fed7aa" />
+  <rect x="164" y="688" width="176" height="54" rx="27" fill="#fb923c" />
+  <text x="194" y="722" fill="#08111f" font-family="Space Grotesk, Arial, sans-serif" font-size="20" font-weight="700">Generate roadmap</text>
+  <rect x="516" y="252" width="364" height="238" rx="28" fill="#ffffff" />
+  <rect x="908" y="252" width="404" height="238" rx="28" fill="#ffffff" />
+  <text x="548" y="308" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="26" font-weight="700">Impact vs effort</text>
+  <circle cx="630" cy="418" r="24" fill="#14b8a6" />
+  <circle cx="716" cy="352" r="26" fill="#fb923c" />
+  <circle cx="776" cy="404" r="32" fill="#0f766e" />
+  <circle cx="676" cy="384" r="20" fill="#f59e0b" />
+  <text x="942" y="308" fill="#0f172a" font-family="Space Grotesk, Arial, sans-serif" font-size="26" font-weight="700">Quarterly roadmap</text>
+  <rect x="946" y="344" width="74" height="112" rx="18" fill="#fed7aa" />
+  <rect x="1040" y="316" width="74" height="140" rx="18" fill="#fb923c" />
+  <rect x="1134" y="356" width="74" height="100" rx="18" fill="#fdba74" />
+  <rect x="1228" y="390" width="74" height="66" rx="18" fill="#ffedd5" />
+  <rect x="516" y="520" width="796" height="238" rx="28" fill="#ffffff" />
+  <rect x="548" y="566" width="732" height="38" rx="19" fill="#e2e8f0" />
+  <rect x="548" y="622" width="678" height="38" rx="19" fill="#ecfeff" />
+  <rect x="548" y="678" width="612" height="38" rx="19" fill="#fef3c7" />
+  <text x="562" y="592" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="18">1. Guided onboarding checklist</text>
+  <text x="562" y="648" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="18">2. Slack anomaly alerts</text>
+  <text x="562" y="704" fill="#0f172a" font-family="Manrope, Arial, sans-serif" font-size="18">3. Mobile dashboard performance</text>
+</svg>
+

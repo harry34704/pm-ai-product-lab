@@ -1,0 +1,49 @@
+user_id,event_name,event_time,feature,plan,platform
+u01,signup,2026-01-05T09:00:00,,free,web
+u01,activate_workspace,2026-01-05T09:10:00,workspace setup,free,web
+u01,create_dashboard,2026-01-06T10:00:00,dashboard builder,free,web
+u01,share_report,2026-01-08T11:00:00,sharing,free,web
+u01,setup_alert,2026-01-12T08:30:00,alerts,free,web
+u02,signup,2026-01-06T12:00:00,,pro,web
+u02,activate_workspace,2026-01-06T12:20:00,workspace setup,pro,web
+u02,create_dashboard,2026-01-07T15:10:00,dashboard builder,pro,web
+u02,invite_teammate,2026-01-09T09:40:00,collaboration,pro,web
+u02,share_report,2026-01-13T13:30:00,sharing,pro,web
+u02,setup_alert,2026-01-20T10:20:00,alerts,pro,web
+u03,signup,2026-01-08T08:10:00,,enterprise,mobile
+u03,activate_workspace,2026-01-08T08:25:00,workspace setup,enterprise,mobile
+u03,create_dashboard,2026-01-10T09:00:00,dashboard builder,enterprise,web
+u03,share_report,2026-01-17T16:40:00,sharing,enterprise,web
+u03,setup_alert,2026-01-24T08:40:00,alerts,enterprise,web
+u04,signup,2026-01-11T14:00:00,,free,mobile
+u04,activate_workspace,2026-01-11T14:10:00,workspace setup,free,mobile
+u04,create_dashboard,2026-01-13T09:50:00,dashboard builder,free,web
+u04,invite_teammate,2026-01-16T10:15:00,collaboration,free,web
+u05,signup,2026-01-13T09:20:00,,pro,web
+u05,activate_workspace,2026-01-13T09:35:00,workspace setup,pro,web
+u05,create_dashboard,2026-01-15T12:00:00,dashboard builder,pro,web
+u05,share_report,2026-01-21T12:10:00,sharing,pro,web
+u05,setup_alert,2026-01-28T12:20:00,alerts,pro,web
+u06,signup,2026-01-18T07:50:00,,free,web
+u06,activate_workspace,2026-01-18T08:10:00,workspace setup,free,web
+u06,create_dashboard,2026-01-22T09:05:00,dashboard builder,free,web
+u06,share_report,2026-01-29T09:05:00,sharing,free,web
+u07,signup,2026-01-20T11:40:00,,enterprise,web
+u07,activate_workspace,2026-01-20T12:00:00,workspace setup,enterprise,web
+u07,create_dashboard,2026-01-23T13:15:00,dashboard builder,enterprise,web
+u07,invite_teammate,2026-01-24T14:15:00,collaboration,enterprise,web
+u07,share_report,2026-02-01T10:15:00,sharing,enterprise,web
+u07,setup_alert,2026-02-07T10:20:00,alerts,enterprise,web
+u08,signup,2026-01-25T10:00:00,,pro,mobile
+u08,activate_workspace,2026-01-25T10:12:00,workspace setup,pro,mobile
+u08,create_dashboard,2026-01-29T10:45:00,dashboard builder,pro,web
+u08,invite_teammate,2026-02-02T09:10:00,collaboration,pro,web
+u08,share_report,2026-02-09T09:12:00,sharing,pro,web
+u08,setup_alert,2026-02-16T09:14:00,alerts,pro,web
+u03,invite_teammate,2026-02-02T11:15:00,collaboration,enterprise,web
+u04,share_report,2026-02-03T16:40:00,sharing,free,web
+u05,invite_teammate,2026-02-05T14:30:00,collaboration,pro,web
+u06,setup_alert,2026-02-11T12:30:00,alerts,free,web
+u01,invite_teammate,2026-02-12T09:00:00,collaboration,free,web
+u02,share_report,2026-02-15T09:00:00,sharing,pro,web
+
