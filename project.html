@@ -3,54 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Detail | PM AI Product Lab</title>
-    <meta
-      name="description"
-      content="Detailed project pages for the PM AI Product Lab portfolio."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Redirecting | Harry Munyai</title>
+    <meta http-equiv="refresh" content="0; url=projects.html" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="style.css" />
+    <script>
+      const slug = new URLSearchParams(window.location.search).get("slug");
+      const target = slug ? `projects.html#${slug}` : "projects.html";
+      window.location.replace(target);
+    </script>
   </head>
-  <body data-page="detail">
-    <div class="page-shell">
-      <header class="site-header">
-        <div class="container nav-shell">
-          <a class="brand" href="index.html#home">
-            <span class="brand-mark">PM</span>
-            <span>AI Product Lab</span>
-          </a>
-          <nav class="site-nav site-nav-static">
-            <a href="index.html#home">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#projects">Projects</a>
-            <a href="YOUR_LINKEDIN_URL" target="_blank" rel="noreferrer">LinkedIn</a>
-          </nav>
-        </div>
-      </header>
-
-      <main class="detail-page">
-        <section class="detail-hero">
-          <div class="container">
-            <a class="back-link" href="index.html#projects">← Back to Projects</a>
-            <div id="project-detail-root"></div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <div class="container footer-shell">
-          <p>PM AI Product Lab</p>
-          <p id="footer-year"></p>
-        </div>
-      </footer>
-    </div>
-    <div class="toast" id="toast"></div>
-    <script src="script.js"></script>
+  <body class="redirect-body">
+    <main class="not-found-main">
+      <section class="not-found-card">
+        <p class="eyebrow">Redirecting</p>
+        <h1>Taking you to the project showcase.</h1>
+        <p>If the redirect does not complete automatically, use the link below.</p>
+        <a class="button primary" href="projects.html">Open Projects</a>
+      </section>
+    </main>
   </body>
 </html>
-

@@ -1,38 +1,61 @@
 # Architecture Overview
 
-`pm-ai-product-lab` is structured as a multi-project Python repository. Each runnable project is intentionally isolated so contributors can understand, run, and extend one app without needing to untangle cross-project coupling.
+`pm-ai-product-lab-v2` is structured as a multi-project product portfolio repository with two clear layers:
 
-The repository also includes a static portfolio website at the root. That site is deployed through GitHub Pages and acts as the public presentation layer for the codebase.
+1. a **static multi-page portfolio platform** at the root
+2. a set of **independently runnable Streamlit apps** inside `projects/` and `product-teardowns/`
+
+The static site is intentionally designed as the public presentation layer for the wider lab. It positions the apps as one integrated product platform rather than a loose collection of demos.
 
 ## Core Principles
 
-- Every project is independently runnable with `streamlit run app.py`
-- Shared dependency management is centralized at the repository root
-- Local project packages keep logic separate from presentation
-- Sample datasets make every dashboard immediately demoable
-- SQLite is used where lightweight persistence adds portfolio realism
+- Every app remains independently runnable with `streamlit run app.py`
+- The portfolio site remains fully static and deployable without a build step
+- App metadata is centralised in `site-data.js` so copy, links, status badges, and deployment placeholders stay easy to update
+- Sample datasets make each app immediately demoable
+- The website and apps tell one coherent story across product strategy, analytics, experimentation, AI, and business analysis
 
 ## Repository Layers
 
-### 1. Presentation Layer
+### 1. Portfolio Presentation Layer
 
-Each app exposes a Streamlit `app.py` entrypoint. The UI layer focuses on:
+The portfolio website lives at the repository root and includes:
 
-- collecting inputs
-- handling uploads
-- managing lightweight session state
-- rendering charts, tables, and exported output
+- `index.html`
+- `about.html`
+- `ai-product-lab.html`
+- `projects.html`
+- `contact.html`
+- `404.html`
+- `project.html` as a redirect shim
+- `style.css`
+- `script.js`
+- `site-data.js`
 
-At the repository root, the static website uses:
+This layer is responsible for:
 
-- `index.html` for the main portfolio experience
-- `project.html` for project detail views
-- `script.js` for project metadata rendering and interaction
-- `style.css` for the responsive visual system
+- public-facing positioning
+- premium portfolio copy
+- responsive layout and UI system
+- app dashboard rendering
+- deployment placeholders for future live app links
+- GitHub Pages or Netlify deployment
 
-### 2. Domain Logic Layer
+### 2. App Surface Layer
 
-Each project keeps product logic in a dedicated package:
+Each app exposes a Streamlit `app.py` entrypoint and remains isolated for clarity and portability:
+
+- `projects/ai-product-validator`
+- `projects/product-analytics-dashboard`
+- `projects/ai-customer-insights`
+- `projects/product-ab-testing-engine`
+- `projects/sports-ai-predictor`
+- `projects/ai-product-roadmap-generator`
+- `product-teardowns`
+
+### 3. Domain Logic Layer
+
+Each project keeps its product logic in a local package so UI and business logic remain separate:
 
 - `validator/`
 - `analytics_dashboard/`
@@ -41,28 +64,29 @@ Each project keeps product logic in a dedicated package:
 - `sports_predictor/`
 - `roadmap_generator/`
 
-These modules contain scoring, analysis, model training, chart generation, or storage helpers. This keeps analytical behavior testable and avoids placing business logic directly inside the Streamlit scripts.
+This keeps scoring, charting, statistical logic, model logic, and storage concerns out of the Streamlit page layer.
 
-### 3. Data Layer
+### 4. Data Layer
 
-The repository uses three local data patterns:
+The repository uses lightweight local data patterns:
 
-- CSV sample datasets for demo-ready analytics and ML flows
+- CSV sample datasets for analytics, insight, experimentation, ML, and planning flows
 - SQLite databases for persisted reports and experiment definitions
-- Markdown teardown files for the documentation portfolio
+- Markdown teardown files for strategy analysis
+- Static image/SVG assets for the public website
 
-## AI Integration Pattern
+## Why The Root Site Uses `site-data.js`
 
-The AI-oriented apps use the same operating model:
+The root website is designed for easy portfolio maintenance. Centralising the content model in `site-data.js` means the following can be updated in one place:
 
-1. Try to call the OpenAI API when `OPENAI_API_KEY` is present.
-2. Fall back to deterministic local logic if the key is absent or the request fails.
-3. Continue rendering the app successfully either way.
+- profile links
+- GitHub repo base URLs
+- CV location
+- app names and categories
+- screenshots
+- status badges
+- `launch_url`, `github_url`, and `details_url`
+- datasets used
+- business value and project copy
 
-This makes the projects portable for demos, code review, and local development without turning API access into a hard runtime dependency.
-
-## Why This Structure Works
-
-- It mirrors how a maintainer would split UI, analytics, and persistence in a small open-source app.
-- It makes each project easy to reason about and modify.
-- It preserves a clean portfolio story: product strategy, analytics, experimentation, ML, teardown thinking, and public presentation all live in one lab with consistent structure.
+That approach keeps the static site easy to maintain as live deployments are added over time.

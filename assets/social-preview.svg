@@ -1,0 +1,29 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#070B16"/>
+  <circle cx="131" cy="121" r="220" fill="#5CE0FF" fill-opacity="0.12"/>
+  <circle cx="1033" cy="86" r="200" fill="#2FB7FF" fill-opacity="0.12"/>
+  <rect x="58" y="58" width="1084" height="514" rx="34" fill="#0A1224" stroke="#1A2946"/>
+  <rect x="96" y="96" width="84" height="84" rx="22" fill="url(#paint0_linear)"/>
+  <path d="M114 157V118H123.54L138.8 140.53L154.08 118H163.62V157H153.74V134.65L141.74 152.05H135.73L123.88 134.77V157H114Z" fill="#06111E"/>
+  <text x="210" y="130" fill="#7DEBFF" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="3">HARRY MUNYAI AI PRODUCT LAB</text>
+  <text x="96" y="236" fill="#F3F8FF" font-family="Sora, Arial, sans-serif" font-size="56" font-weight="700">
+    <tspan x="96" dy="0">Product Manager.</tspan>
+    <tspan x="96" dy="70">Business Analyst.</tspan>
+    <tspan x="96" dy="70">AI Product Builder.</tspan>
+  </text>
+  <text x="96" y="474" fill="#B8CAE6" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">
+    Premium portfolio platform with 7 deployable apps, product strategy, analytics, and AI systems.
+  </text>
+  <rect x="96" y="512" width="220" height="22" rx="11" fill="#10203A"/>
+  <rect x="336" y="512" width="220" height="22" rx="11" fill="#10203A"/>
+  <rect x="576" y="512" width="220" height="22" rx="11" fill="#10203A"/>
+  <text x="110" y="527" fill="#EAF5FF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">7 Product Apps</text>
+  <text x="350" y="527" fill="#EAF5FF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Dark Premium Interface</text>
+  <text x="590" y="527" fill="#EAF5FF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Launch-Ready Links</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="105" y1="102" x2="168" y2="175" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5CE0FF"/>
+      <stop offset="1" stop-color="#2FB7FF"/>
+    </linearGradient>
+  </defs>
+</svg>

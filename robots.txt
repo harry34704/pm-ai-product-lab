@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://harry34704.github.io/pm-ai-product-lab-v2/sitemap.xml
