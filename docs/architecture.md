@@ -1,6 +1,6 @@
 # Architecture Overview
 
-`pm-ai-product-lab-v2` is structured as a multi-project product portfolio repository with two clear layers:
+`pm-ai-product-lab` is structured as a multi-project product portfolio repository with two clear layers:
 
 1. a **static multi-page portfolio platform** at the root
 2. a set of **independently runnable Streamlit apps** inside `projects/` and `product-teardowns/`

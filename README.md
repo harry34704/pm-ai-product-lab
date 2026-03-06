@@ -1,4 +1,4 @@
-# pm-ai-product-lab-v2
+# pm-ai-product-lab
 
 Premium multi-page portfolio platform for **Harry Munyai**:
 
@@ -45,7 +45,7 @@ The site is designed to feel like a real product platform rather than a static p
 ## Folder Structure
 
 ```text
-pm-ai-product-lab-v2/
+pm-ai-product-lab/
 |-- 404.html
 |-- about.html
 |-- ai-product-lab.html
@@ -182,7 +182,7 @@ This site is static, so deployment is simple.
 ### Option 1: GitHub Pages
 
 1. Push the repo to GitHub.
-2. Rename the repository to `pm-ai-product-lab-v2` if you want the default URL to match the site config.
+2. Keep the repository name as `pm-ai-product-lab` so it matches the current site config.
 3. In GitHub, open `Settings` -> `Pages`.
 4. Set the source to deploy from the repository root on your main branch.
 5. Save and wait for GitHub Pages to publish the site.
@@ -190,7 +190,7 @@ This site is static, so deployment is simple.
 Expected URL:
 
 ```text
-https://harry34704.github.io/pm-ai-product-lab-v2/
+https://harry34704.github.io/pm-ai-product-lab/
 ```
 
 If you deploy under a different repo name or custom domain, update `siteUrl` in `site-data.js` and the canonical/social URLs in the HTML pages.

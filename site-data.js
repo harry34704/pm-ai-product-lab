@@ -1,5 +1,5 @@
 const siteConfig = {
-  projectName: "pm-ai-product-lab-v2",
+  projectName: "pm-ai-product-lab",
   siteName: "Harry Munyai AI Product Lab",
   personName: "Harry Munyai",
   role: "Product Manager | Business Analyst | AI Product Builder",
@@ -8,8 +8,8 @@ const siteConfig = {
   linkedin: "https://www.linkedin.com/in/harrymunyai/",
   github: "https://github.com/harry34704",
   cvPath: "assets/Harry_Munyai_PM.pdf",
-  siteUrl: "https://harry34704.github.io/pm-ai-product-lab-v2",
-  repoBaseUrl: "https://github.com/harry34704/pm-ai-product-lab-v2/tree/main",
+  siteUrl: "https://harry34704.github.io/pm-ai-product-lab",
+  repoBaseUrl: "https://github.com/harry34704/pm-ai-product-lab/tree/main",
 };
 
 const homeCapabilities = [
