@@ -3,10 +3,11 @@ __pycache__/
 *.pyc
 .DS_Store
 .streamlit/
+!.streamlit/
+!.streamlit/config.toml
 *.db
 *.sqlite3
 .env
 dist/
 build/
 .pytest_cache/
-
