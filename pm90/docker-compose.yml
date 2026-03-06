@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: pm90
+      POSTGRES_USER: pm90
+      POSTGRES_PASSWORD: pm90
+    ports:
+      - "5432:5432"
+    volumes:
+      - pm90-postgres:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://pm90:pm90@db:5432/pm90
+      JWT_SECRET: ${JWT_SECRET:-pm90-dev-secret-change-me}
+      AI_PROVIDER: ${AI_PROVIDER:-fallback}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      DEMO_USER_EMAIL: ${DEMO_USER_EMAIL:-demo@pm90.app}
+      DEMO_USER_PASSWORD: ${DEMO_USER_PASSWORD:-Demo123!}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000/api}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pm90-postgres:

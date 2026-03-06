@@ -1,0 +1,11 @@
+.env
+backend/.env
+backend/.venv/
+backend/__pycache__/
+backend/app/__pycache__/
+backend/app/routers/__pycache__/
+backend/app/services/__pycache__/
+backend/pm90.db
+frontend/.env.local
+frontend/.next/
+frontend/node_modules/
