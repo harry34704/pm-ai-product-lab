@@ -1,4 +1,5 @@
 # pm-ai-product-lab
+<<<<<<< HEAD
 
 `pm-ai-product-lab` is a portfolio repository and static GitHub Pages site for Harry Munyai, built to showcase product thinking, analytics fluency, AI experimentation, and lightweight ML delivery.
 
@@ -210,3 +211,6 @@ Syntax validation can be run with:
 ```bash
 env PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m compileall -q .
 ```
+=======
+pm-ai-product-lab │ ├ ai-product-validator ├ product-analytics-dashboard ├ ai-customer-insights ├ product-ab-testing-engine ├ sports-ai-predictor ├ ai-product-roadmap-generator └ product-teardowns
+>>>>>>> 4167ef506e84a0e740101f46b1eee0d3eb8f9d89
