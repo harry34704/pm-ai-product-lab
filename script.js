@@ -46,7 +46,11 @@ function copyText(text, message) {
 function getLaunchStatusCopy(app) {
   return app.launch_url
     ? "Live deployment connected"
-    : "Deployment slot ready. Add launch_url in site-data.js to activate.";
+    : "Live deployment not connected yet. A local run guide is available from the portfolio.";
+}
+
+function getLaunchButtonLabel(app) {
+  return app.launch_url ? "Launch App" : "Open Run Guide";
 }
 
 function openLaunch(app) {
@@ -55,7 +59,11 @@ function openLaunch(app) {
     return;
   }
 
-  showToast(`Launch URL pending for ${app.name}. Update launch_url in site-data.js.`);
+  if (app.localRun?.length) {
+    copyText(app.localRun.join("\n"), `${app.name} run instructions copied.`);
+  }
+
+  window.location.href = app.details_url;
 }
 
 function setExternalLinks() {
@@ -159,7 +167,7 @@ function createActionButtons(app, context = "default") {
   const launchClass = context === "lab" ? "button primary" : "button secondary";
   return `
     <div class="card-actions">
-      <button class="${launchClass}" type="button" data-launch-slug="${escapeHtml(app.slug)}">Launch App</button>
+      <button class="${launchClass}" type="button" data-launch-slug="${escapeHtml(app.slug)}">${escapeHtml(getLaunchButtonLabel(app))}</button>
       <a class="button tertiary" href="${escapeHtml(app.details_url)}">View Details</a>
       <a class="button tertiary" href="${escapeHtml(app.github_url)}" target="_blank" rel="noreferrer">View Code</a>
     </div>

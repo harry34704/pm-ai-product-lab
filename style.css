@@ -447,7 +447,7 @@ h4 {
 
 .profile-panel {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
   gap: 1rem;
   align-items: center;
 }
@@ -463,7 +463,9 @@ h4 {
   position: relative;
   border-radius: 1.4rem;
   overflow: hidden;
-  min-height: 360px;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  min-height: 0;
   background: radial-gradient(circle at top, rgba(92, 224, 255, 0.18), transparent 60%);
 }
 
@@ -471,10 +473,11 @@ h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
 }
 
 .profile-image-frame.compact {
-  min-height: 220px;
+  aspect-ratio: 1 / 1.15;
 }
 
 .profile-meta h2,
@@ -538,6 +541,23 @@ h4 {
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.8rem;
+}
+
+.mini-card-top,
+.card-topline {
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mini-card-top > span:first-child,
+.card-topline > span:first-child {
+  min-width: 0;
+}
+
+.mini-card-top .status-badge,
+.card-topline .status-badge {
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .mini-card h4,
