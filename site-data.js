@@ -1,3 +1,4 @@
+(() => {
 const siteConfig = {
   projectName: "pm-ai-product-lab",
   siteName: "Harry Munyai AI Product Lab",
@@ -530,3 +531,4 @@ window.PortfolioData = {
   labApps,
   featuredLabApps,
 };
+})();
