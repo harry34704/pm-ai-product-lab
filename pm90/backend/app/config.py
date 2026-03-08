@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import List
+from typing import List, Set
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -36,7 +36,10 @@ class Settings(BaseSettings):
 
     @property
     def cors_origin_list(self) -> List[str]:
-        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+        origins: Set[str] = {origin.strip() for origin in self.cors_origins.split(",") if origin.strip()}
+        if self.frontend_base_url.strip():
+            origins.add(self.frontend_base_url.strip())
+        return sorted(origins)
 
 
 @lru_cache(maxsize=1)

@@ -36,6 +36,7 @@ pm90/
 - Setup guide: [docs/setup.md](docs/setup.md)
 - Architecture diagram: [docs/architecture.md](docs/architecture.md)
 - Deployment guide: [docs/deployment.md](docs/deployment.md)
+- Railway guide: [docs/railway.md](docs/railway.md)
 
 ## Demo account
 
@@ -175,6 +176,14 @@ docker compose up --build -d
 - Frontend: Vercel, Netlify, or Docker on Fly.io / Render
 - Backend: Render, Railway, Fly.io, or ECS
 - Database: Neon, Supabase Postgres, Railway Postgres, or RDS
+
+## Railway deployment
+
+PM90 is prepared for Railway as a monorepo with one frontend service, one backend service, and one PostgreSQL service.
+
+- Backend config-as-code: [backend/railway.json](backend/railway.json)
+- Frontend config-as-code: [frontend/railway.json](frontend/railway.json)
+- Full Railway setup: [docs/railway.md](docs/railway.md)
 
 ## See the app locally
 
