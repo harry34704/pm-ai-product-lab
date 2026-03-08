@@ -1,92 +1,58 @@
-# Architecture Overview
+# Architecture
 
-`pm-ai-product-lab` is structured as a multi-project product portfolio repository with two clear layers:
+## App Structure
 
-1. a **static multi-page portfolio platform** at the root
-2. a set of **independently runnable Streamlit apps** inside `projects/` and `product-teardowns/`
+- `apps/web`: Next.js App Router UI and internal API routes
+- `apps/desktop`: Electron shell with a secure preload bridge
+- `packages/shared`: AI provider router, prompts, schemas, and deterministic services
+- `prisma`: database schema and seed data
+- `tests`: unit, integration, and e2e coverage
 
-The static site is intentionally designed as the public presentation layer for the wider lab. It positions the apps as one integrated product platform rather than a loose collection of demos.
+## Desktop Runtime Model
 
-## Core Principles
+1. Electron starts a visible `BrowserWindow`.
+2. In development it loads `http://localhost:3000`.
+3. In production it can load the built Next.js standalone server output.
+4. The preload bridge exposes only:
+   - app metadata
+   - file dialog helpers
+   - file reading helpers
+   - microphone permission requests
+5. Node integration stays disabled in the renderer and context isolation stays enabled.
 
-- Every app remains independently runnable with `streamlit run app.py`
-- The portfolio site remains fully static and deployable without a build step
-- App metadata is centralised in `site-data.js` so copy, links, status badges, and deployment placeholders stay easy to update
-- Sample datasets make each app immediately demoable
-- The website and apps tell one coherent story across product strategy, analytics, experimentation, AI, and business analysis
+## Provider Router Design
 
-## Repository Layers
+- `ProviderRouter` accepts a priority order and registered providers.
+- Each provider implements:
+  - `generateText`
+  - `generateStructured`
+  - `transcribeAudio`
+  - `healthCheck`
+- Router behavior:
+  - attempts providers in priority order
+  - logs fallback events
+  - skips unavailable providers
+  - returns graceful errors if all providers fail
+- `MockProvider` is included so local MVP flows work without external keys.
 
-### 1. Portfolio Presentation Layer
+## Session Lifecycle
 
-The portfolio website lives at the repository root and includes:
+1. Authenticated user creates a practice room.
+2. Room owner shares the room code or URL.
+3. Candidate and interviewer join with explicit roles.
+4. Owner starts the session.
+5. Clients request microphone access and acknowledge transcript consent.
+6. Transcript events are saved incrementally.
+7. The coaching panel polls for visible practice hints.
+8. Ending the session generates question extraction, answer scoring, rewrites, and a feedback report.
 
-- `index.html`
-- `about.html`
-- `ai-product-lab.html`
-- `projects.html`
-- `contact.html`
-- `404.html`
-- `project.html` as a redirect shim
-- `style.css`
-- `script.js`
-- `site-data.js`
+## Data Model
 
-This layer is responsible for:
+Core persisted entities:
 
-- public-facing positioning
-- premium portfolio copy
-- responsive layout and UI system
-- app dashboard rendering
-- deployment placeholders for future live app links
-- GitHub Pages or Netlify deployment
-
-### 2. App Surface Layer
-
-Each app exposes a Streamlit `app.py` entrypoint and remains isolated for clarity and portability:
-
-- `projects/ai-product-validator`
-- `projects/product-analytics-dashboard`
-- `projects/ai-customer-insights`
-- `projects/product-ab-testing-engine`
-- `projects/sports-ai-predictor`
-- `projects/ai-product-roadmap-generator`
-- `product-teardowns`
-
-### 3. Domain Logic Layer
-
-Each project keeps its product logic in a local package so UI and business logic remain separate:
-
-- `validator/`
-- `analytics_dashboard/`
-- `customer_insights/`
-- `ab_testing/`
-- `sports_predictor/`
-- `roadmap_generator/`
-
-This keeps scoring, charting, statistical logic, model logic, and storage concerns out of the Streamlit page layer.
-
-### 4. Data Layer
-
-The repository uses lightweight local data patterns:
-
-- CSV sample datasets for analytics, insight, experimentation, ML, and planning flows
-- SQLite databases for persisted reports and experiment definitions
-- Markdown teardown files for strategy analysis
-- Static image/SVG assets for the public website
-
-## Why The Root Site Uses `site-data.js`
-
-The root website is designed for easy portfolio maintenance. Centralising the content model in `site-data.js` means the following can be updated in one place:
-
-- profile links
-- GitHub repo base URLs
-- CV location
-- app names and categories
-- screenshots
-- status badges
-- `launch_url`, `github_url`, and `details_url`
-- datasets used
-- business value and project copy
-
-That approach keeps the static site easy to maintain as live deployments are added over time.
+- `User`, `Profile`, `UserSettings`
+- `Resume`, `ResumeSection`
+- `JobDescription`, `AnalysisReport`
+- `Story`
+- `PracticeRoom`, `RoomParticipant`, `Session`
+- `SessionQuestion`, `SessionAnswer`, `FeedbackReport`

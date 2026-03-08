@@ -1,226 +1,103 @@
-# pm-ai-product-lab
+# MockRoom AI
 
-Premium multi-page portfolio platform for **Harry Munyai**:
+MockRoom AI is a desktop-first interview rehearsal platform for ethical mock interviews. It helps candidates upload resumes, add job descriptions, analyze fit, extract STAR stories, run visible practice sessions, stream consent-based transcripts, and review answers after the session.
 
-- Product Manager
-- Business Analyst
-- AI Product Builder
+## Practice-Only Boundary
 
-The site is designed to feel like a real product platform rather than a static portfolio. It presents Harry's work through a premium dark-theme interface and a unified **AI Product Lab** dashboard that brings seven deployable apps into one operating surface.
+MockRoom AI is for practice and rehearsal only.
 
-## What Is Included
+- No stealth overlays
+- No hidden prompts
+- No transparent or click-through windows
+- No undisclosed assistance during real interviews
+- No covert capture or detection evasion
 
-### Public website
+All coaching is clearly labeled and visible in `Practice Mode`.
 
-- `index.html` - premium home page
-- `about.html` - professional profile, strengths, sectors, tools, certifications, and product philosophy
-- `ai-product-lab.html` - dashboard-style control center for all seven apps
-- `projects.html` - detailed showcase with business problem, solution, stack, datasets, screenshots, and local run instructions
-- `contact.html` - direct contact surface with LinkedIn, GitHub, email, and CV download
-- `404.html` - premium fallback page
-- `project.html` - legacy redirect to `projects.html`
-- `style.css` - shared visual system
-- `script.js` - shared interaction and rendering logic
-- `site-data.js` - central content/config layer for profile data and app metadata
+## Stack
 
-### Product apps
+- Next.js App Router + TypeScript + Tailwind CSS
+- Electron desktop shell with preload IPC bridge
+- Prisma ORM with SQLite
+- Zustand + TanStack Query
+- Zod validation
+- Provider router for OpenAI-compatible, Groq-compatible, OpenRouter-compatible, Ollama, and Mock providers
+- Vitest + Playwright
 
-- `projects/ai-product-validator`
-- `projects/product-analytics-dashboard`
-- `projects/ai-customer-insights`
-- `projects/product-ab-testing-engine`
-- `projects/sports-ai-predictor`
-- `projects/ai-product-roadmap-generator`
-- `product-teardowns`
-
-### Assets
-
-- `assets/profile.jpg`
-- `assets/profile.png`
-- `assets/Harry_Munyai_PM.pdf`
-- `assets/favicon.svg`
-- `assets/social-preview.svg`
-- `assets/project_images/*`
-
-## Folder Structure
+## Repository Layout
 
 ```text
-pm-ai-product-lab/
-|-- 404.html
-|-- about.html
-|-- ai-product-lab.html
-|-- contact.html
-|-- index.html
-|-- project.html
-|-- projects.html
-|-- README.md
-|-- robots.txt
-|-- script.js
-|-- sitemap.xml
-|-- site-data.js
-|-- style.css
-|-- assets/
-|   |-- Harry_Munyai_PM.pdf
-|   |-- favicon.svg
-|   |-- profile.jpg
-|   |-- profile.png
-|   |-- social-preview.svg
-|   `-- project_images/
-|-- docs/
-|-- product-teardowns/
-`-- projects/
+apps/
+  desktop/
+  web/
+packages/
+  shared/
+prisma/
+tests/
+docs/
 ```
 
-## Local Preview
+## Local Run
 
-Because the site is fully static, there is no build step.
-
-### Quick preview
-
-Open `index.html` directly in a browser.
-
-### Better local preview
+1. Copy `.env.example` to `.env`.
+2. Install dependencies.
+3. Push the Prisma schema.
+4. Seed the local database.
+5. Start the web app and Electron shell.
 
 ```bash
-python3 -m http.server 8000
+pnpm install
+pnpm prisma:migrate
+pnpm prisma:seed
+pnpm dev
 ```
 
-Then visit:
+The web app runs at [http://localhost:3000](http://localhost:3000). The Electron shell waits for the Next.js dev server and then opens the visible desktop window.
 
-```text
-http://localhost:8000
+## Provider Configuration
+
+The default priority is `mock,openai,groq,openrouter,ollama` so the app works locally even without API keys.
+
+- Set `AI_PROVIDER_PRIORITY` in `.env`.
+- Configure model env vars per provider.
+- Update provider order in the Settings page.
+- Enable `local-only mode` if you want the app to avoid remote providers.
+
+## Electron Dev Mode
+
+```bash
+pnpm dev
 ```
 
-## Central Update File
+That starts:
 
-The main maintenance file is:
+- the Next.js UI in `apps/web`
+- the Electron shell in `apps/desktop`
 
-- `site-data.js`
+## Build and Package
 
-That file controls:
-
-- profile identity and external links
-- GitHub repo base URL
-- app names and categories
-- app status badges
-- `launch_url`
-- `github_url`
-- `details_url`
-- business problem and solution copy
-- datasets used
-- business value
-- local run instructions
-
-If you want to change portfolio wording or activate live app links later, start there.
-
-## How To Update Profile Details
-
-### Update the profile image
-
-Replace:
-
-- `assets/profile.jpg`
-
-Optional:
-
-- `assets/profile.png`
-
-The website currently uses `assets/profile.jpg`.
-
-### Update the CV
-
-Replace:
-
-- `assets/Harry_Munyai_PM.pdf`
-
-The download buttons already point to that file.
-
-### Update LinkedIn, GitHub, email, repo URL, or site URL
-
-Edit:
-
-- `site-data.js`
-
-Update these keys:
-
-```js
-linkedin
-github
-email
-siteUrl
-repoBaseUrl
+```bash
+pnpm build
+pnpm electron:build
 ```
 
-## How To Activate Live App Links
+## Test Commands
 
-Each app in `site-data.js` includes:
-
-```js
-launch_url
-github_url
-details_url
+```bash
+pnpm test
+pnpm test:e2e
 ```
 
-To make an app launch live:
+## Seed Accounts
 
-1. Deploy the Streamlit app.
-2. Copy the deployed URL.
-3. Paste it into that app's `launch_url`.
+After seeding, these demo accounts are available:
 
-Example:
+- `pm@example.com` / `Password123!`
+- `ba@example.com` / `Password123!`
 
-```js
-launch_url: "https://your-app-name.streamlit.app"
-```
+## Docs
 
-If `launch_url` is empty, the site keeps the premium launch button but shows a placeholder toast instead of opening a broken link.
-
-## GitHub Pages Deployment
-
-This site is static, so deployment is simple.
-
-### Option 1: GitHub Pages
-
-1. Push the repo to GitHub.
-2. Keep the repository name as `pm-ai-product-lab` so it matches the current site config.
-3. In GitHub, open `Settings` -> `Pages`.
-4. Set the source to deploy from the repository root on your main branch.
-5. Save and wait for GitHub Pages to publish the site.
-
-Expected URL:
-
-```text
-https://harry34704.github.io/pm-ai-product-lab/
-```
-
-If you deploy under a different repo name or custom domain, update `siteUrl` in `site-data.js` and the canonical/social URLs in the HTML pages.
-
-## Netlify Deployment
-
-1. Connect the repository in Netlify.
-2. Set the publish directory to the repository root.
-3. Leave the build command empty.
-4. Deploy.
-
-No framework adapter or bundler is required.
-
-## Notes On Copy And Positioning
-
-The site copy is intentionally positioned around:
-
-- product strategy
-- business analysis
-- payments and platform operations
-- analytics and SQL-led decision making
-- AI prototyping
-
-The goal is to make the portfolio feel credible to senior stakeholders, hiring managers, and LinkedIn audiences without sounding inflated or generic.
-
-## Verification
-
-Recommended checks after updates:
-
-1. Open all top-level pages and confirm navigation, footer links, and download buttons work.
-2. Confirm `launch_url` buttons behave correctly for both empty and live links.
-3. Check screenshots, profile image, and social assets render correctly.
-4. Review mobile layout for the header, dashboard cards, and project sections.
+- [Architecture](docs/ARCHITECTURE.md)
+- [Setup](docs/SETUP.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Ethics](docs/ETHICS.md)

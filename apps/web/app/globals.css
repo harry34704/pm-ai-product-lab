@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top right, rgba(6, 182, 212, 0.18), transparent 28%),
+    radial-gradient(circle at left center, rgba(16, 185, 129, 0.14), transparent 24%),
+    #0b1020;
+}
+
+body {
+  min-height: 100vh;
+  color: hsl(214 27% 96%);
+  background: transparent;
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+}
+
+* {
+  border-color: hsl(220 16% 22%);
+}
+
+.glass-card {
+  background: linear-gradient(180deg, rgba(14, 20, 36, 0.96), rgba(10, 15, 28, 0.94));
+  backdrop-filter: blur(14px);
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

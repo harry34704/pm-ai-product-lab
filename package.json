@@ -1,0 +1,35 @@
+{
+  "name": "mockroom-ai",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "concurrently -k -n web,desktop \"pnpm --filter @mockroom/web dev\" \"pnpm --filter @mockroom/desktop dev\"",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "prisma:migrate": "prisma db push --skip-generate && prisma generate",
+    "prisma:seed": "tsx prisma/seed.ts",
+    "electron:build": "pnpm --filter @mockroom/shared build && pnpm --filter @mockroom/web build && pnpm --filter @mockroom/desktop package",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.4.1",
+    "@mockroom/shared": "workspace:*",
+    "bcryptjs": "^2.4.3",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "@types/node": "^22.13.10",
+    "concurrently": "^9.1.2",
+    "electron-builder": "^25.1.8",
+    "playwright": "^1.51.0",
+    "prisma": "^6.4.1",
+    "tsx": "^4.19.3",
+    "turbo": "^2.4.4",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}

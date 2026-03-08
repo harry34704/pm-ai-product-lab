@@ -1,0 +1,281 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum ResumeSectionType {
+  HEADLINE
+  SUMMARY
+  EXPERIENCE
+  ACHIEVEMENT
+  SKILL
+  TOOL
+  EDUCATION
+  CERTIFICATION
+  PROJECT
+}
+
+enum StoryCategory {
+  LEADERSHIP
+  DELIVERY
+  ANALYTICS
+  STAKEHOLDER_MANAGEMENT
+  OWNERSHIP
+  CONFLICT
+  FAILURE
+  CUSTOMER_FOCUS
+  AMBIGUITY
+}
+
+enum PracticeRoomStatus {
+  LOBBY
+  LIVE
+  ENDED
+}
+
+enum ParticipantRole {
+  CANDIDATE
+  INTERVIEWER
+}
+
+enum SessionStatus {
+  LOBBY
+  LIVE
+  ENDED
+}
+
+model User {
+  id                 String             @id @default(cuid())
+  email              String             @unique
+  passwordHash       String
+  name               String
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  profile            Profile?
+  resumes            Resume[]
+  jobDescriptions    JobDescription[]
+  analysisReports    AnalysisReport[]
+  stories            Story[]
+  ownedRooms         PracticeRoom[]     @relation("RoomOwner")
+  roomParticipants   RoomParticipant[]
+  candidateSessions  Session[]          @relation("CandidateSession")
+  interviewerSessions Session[]         @relation("InterviewerSession")
+  settings           UserSettings?
+
+  @@index([createdAt])
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  targetRole  String?
+  seniority   String?
+  industries  Json?
+  answerTone  String?
+  introStyle  String?
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Resume {
+  id               String          @id @default(cuid())
+  userId           String
+  title            String
+  originalFileName String?
+  rawText          String
+  parsedJson       Json
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sections         ResumeSection[]
+  analysisReports  AnalysisReport[]
+
+  @@index([userId, createdAt])
+}
+
+model ResumeSection {
+  id        String            @id @default(cuid())
+  resumeId  String
+  type      ResumeSectionType
+  heading   String
+  content   String
+  sortOrder Int
+  resume    Resume            @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  @@index([resumeId, sortOrder])
+}
+
+model JobDescription {
+  id              String           @id @default(cuid())
+  userId          String
+  title           String
+  company         String?
+  rawText         String
+  parsedJson      Json
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analysisReports AnalysisReport[]
+
+  @@index([userId, createdAt])
+}
+
+model AnalysisReport {
+  id                   String         @id @default(cuid())
+  userId               String
+  resumeId             String
+  jobDescriptionId     String
+  matchScore           Int
+  matchedKeywords      Json
+  missingKeywords      Json
+  strengths            Json
+  gapFraming           Json
+  likelyQuestions      Json
+  intro30              String
+  intro60              String
+  intro90              String
+  createdAt            DateTime       @default(now())
+  user                 User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resume               Resume         @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  jobDescription       JobDescription @relation(fields: [jobDescriptionId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([resumeId, jobDescriptionId])
+}
+
+model Story {
+  id                       String        @id @default(cuid())
+  userId                   String
+  title                    String
+  category                 StoryCategory
+  tags                     Json
+  scenario                 String
+  task                     String
+  action                   String
+  result                   String
+  evidence                 String
+  exampleQuestions         Json
+  createdAt                DateTime      @default(now())
+  updatedAt                DateTime      @updatedAt
+  user                     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, category])
+}
+
+model PracticeRoom {
+  id              String             @id @default(cuid())
+  ownerId         String
+  roomCode        String             @unique
+  title           String
+  status          PracticeRoomStatus @default(LOBBY)
+  durationMinutes Int
+  createdAt       DateTime           @default(now())
+  startedAt       DateTime?
+  endedAt         DateTime?
+  owner           User               @relation("RoomOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  participants    RoomParticipant[]
+  sessions        Session[]
+
+  @@index([ownerId, createdAt])
+}
+
+model RoomParticipant {
+  id          String          @id @default(cuid())
+  roomId      String
+  userId      String?
+  displayName String
+  role        ParticipantRole
+  joinedAt    DateTime        @default(now())
+  leftAt      DateTime?
+  room        PracticeRoom    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([roomId, joinedAt])
+  @@index([userId])
+}
+
+model Session {
+  id                String        @id @default(cuid())
+  roomId            String
+  candidateUserId   String?
+  interviewerUserId String?
+  status            SessionStatus @default(LOBBY)
+  transcript        String?
+  transcriptJson    Json?
+  startedAt         DateTime?
+  endedAt           DateTime?
+  createdAt         DateTime      @default(now())
+  room              PracticeRoom  @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  candidateUser     User?         @relation("CandidateSession", fields: [candidateUserId], references: [id], onDelete: SetNull)
+  interviewerUser   User?         @relation("InterviewerSession", fields: [interviewerUserId], references: [id], onDelete: SetNull)
+  questions         SessionQuestion[]
+  answers           SessionAnswer[]
+  feedbackReport    FeedbackReport?
+
+  @@index([roomId, createdAt])
+}
+
+model SessionQuestion {
+  id            String          @id @default(cuid())
+  sessionId     String
+  text          String
+  timestampMs   Int
+  detectedTopic String?
+  createdAt     DateTime        @default(now())
+  session       Session         @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  answers       SessionAnswer[]
+
+  @@index([sessionId, timestampMs])
+}
+
+model SessionAnswer {
+  id               String           @id @default(cuid())
+  sessionId        String
+  questionId       String?
+  speakerLabel     String
+  text             String
+  score            Int?
+  strengths        Json?
+  weaknesses       Json?
+  improvedAnswer   String?
+  starRewrite      String?
+  conciseRewrite   String?
+  executiveRewrite String?
+  createdAt        DateTime         @default(now())
+  session          Session          @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  question         SessionQuestion? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId, createdAt])
+  @@index([questionId])
+}
+
+model FeedbackReport {
+  id               String   @id @default(cuid())
+  sessionId        String   @unique
+  summary          String
+  topStrengths     Json
+  topImprovements  Json
+  fillerWordNotes  Json
+  createdAt        DateTime @default(now())
+  session          Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model UserSettings {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  aiProviderPriority    Json
+  defaultModel          String?
+  transcriptionProvider String   @default("browser")
+  coachingLevel         String   @default("balanced")
+  localOnlyMode         Boolean  @default(false)
+  storeAudio            Boolean  @default(false)
+  darkMode              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
