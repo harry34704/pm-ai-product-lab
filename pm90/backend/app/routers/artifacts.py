@@ -90,6 +90,42 @@ def build_prioritization_board(payload: ArtifactGenerateRequest) -> str:
     )
 
 
+def build_persona(payload: ArtifactGenerateRequest) -> str:
+    return (
+        f"# Persona: {payload.product_name}\n\n"
+        f"## Core audience\n{payload.audience}\n\n"
+        "## Goals\n"
+        f"- Solve: {payload.problem}\n"
+        f"- Achieve: {payload.outcome}\n"
+        "- Reduce friction in the first-time user journey\n\n"
+        "## Behaviors\n"
+        "- Compares several tools before committing\n"
+        "- Needs visible proof of value within the first session\n"
+        "- Shares wins with collaborators when confidence is high\n\n"
+        "## Pain points\n"
+        "- Setup complexity and unclear product payoff\n"
+        "- Weak analytics visibility into progress\n"
+        "- Too many choices before first value\n\n"
+        f"## Context\n{payload.context or 'No additional context provided.'}\n"
+    )
+
+
+def build_north_star_metric(payload: ArtifactGenerateRequest) -> str:
+    return (
+        f"# North Star Metric: {payload.product_name}\n\n"
+        f"## Product outcome\n{payload.outcome}\n\n"
+        "## Recommended north star\n"
+        f"- Weekly successful outcomes for {payload.audience}\n\n"
+        "## Why this metric works\n"
+        f"- It tracks whether the product is truly solving {payload.problem}\n"
+        "- It aligns product, design, engineering, and GTM around sustained value\n"
+        "- It can be paired with activation, retention, and monetization guardrails\n\n"
+        "## Guardrails\n"
+        "- Activation rate\n- 7-day retention\n- Support contact rate\n- Revenue quality\n\n"
+        f"## Context\n{payload.context or 'No additional context provided.'}\n"
+    )
+
+
 @router.get("", response_model=List[ArtifactResponse])
 def list_artifacts(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> List[ArtifactResponse]:
     artifacts = db.query(Artifact).filter(Artifact.user_id == current_user.id).order_by(Artifact.created_at.desc()).all()
@@ -120,6 +156,28 @@ def generate_roadmap(payload: ArtifactGenerateRequest, current_user: User = Depe
 def generate_prioritization(payload: ArtifactGenerateRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> ArtifactResponse:
     content = build_prioritization_board(payload)
     artifact = create_artifact_record(db, current_user.id, f"Prioritization: {payload.product_name}", "prioritization", content, "AI-assisted prioritization board", {"format": "markdown", "generator": "pm90"})
+    return serialize_artifact(artifact)
+
+
+@router.post("/generate/persona", response_model=ArtifactResponse, status_code=status.HTTP_201_CREATED)
+def generate_persona(payload: ArtifactGenerateRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> ArtifactResponse:
+    content = build_persona(payload)
+    artifact = create_artifact_record(db, current_user.id, f"Persona: {payload.product_name}", "persona", content, "AI-assisted user persona", {"format": "markdown", "generator": "pm90"})
+    return serialize_artifact(artifact)
+
+
+@router.post("/generate/north-star", response_model=ArtifactResponse, status_code=status.HTTP_201_CREATED)
+def generate_north_star(payload: ArtifactGenerateRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> ArtifactResponse:
+    content = build_north_star_metric(payload)
+    artifact = create_artifact_record(
+        db,
+        current_user.id,
+        f"North Star: {payload.product_name}",
+        "north-star-metric",
+        content,
+        "AI-assisted north star metric brief",
+        {"format": "markdown", "generator": "pm90"},
+    )
     return serialize_artifact(artifact)
 
 

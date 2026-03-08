@@ -45,7 +45,11 @@ export default function DashboardPage() {
             <StatCard label="XP balance" value={`${data.user.xp_balance}`} hint="Earned from daily lessons and simulations." />
             <StatCard label="Current level" value={`${data.user.current_level}`} hint="Levels increase every 400 XP." />
             <StatCard label="Daily streak" value={`${data.streak_count} days`} hint="Consistency compounds product judgment." />
-            <StatCard label="Artifacts built" value={`${data.artifacts.length}`} hint="Proof-of-work output saved to your portfolio." />
+            <StatCard
+              label="Certification"
+              value={data.certificate.issued ? "Issued" : data.certificate.eligible ? "Ready" : "Locked"}
+              hint={data.certificate.issued ? "Your PM90 certificate is now part of the portfolio." : "Complete all 90 days to unlock certification."}
+            />
           </div>
 
           <div className="grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
@@ -92,10 +96,16 @@ export default function DashboardPage() {
               <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/75">Skill tree</p>
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {data.skill_tree.map((skill) => (
-                  <div key={skill.skill} className="rounded-[24px] border border-white/10 bg-white/5 p-4">
-                    <p className="text-sm text-slate-400">{skill.skill}</p>
-                    <p className="mt-2 text-2xl font-semibold text-white">{skill.progress_percent}%</p>
-                    <p className="mt-2 text-sm text-slate-300">{skill.completed_days} of {skill.total_days} days completed</p>
+                  <div key={skill.skill} className={`rounded-[24px] border p-4 ${skill.unlocked ? "border-white/10 bg-white/5" : "border-white/6 bg-white/[0.03]"}`}>
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="text-sm text-slate-400">{skill.skill}</p>
+                      <div className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.25em] ${skill.unlocked ? "bg-cyan-400/10 text-cyan-100" : "bg-white/5 text-slate-500"}`}>
+                        {skill.unlocked ? `Lvl ${skill.current_level}` : "Locked"}
+                      </div>
+                    </div>
+                    <p className={`mt-2 text-2xl font-semibold ${skill.unlocked ? "text-white" : "text-slate-500"}`}>{skill.progress_percent}%</p>
+                    <p className="mt-2 text-sm text-slate-300">{skill.completed_days} of {skill.total_days} milestones completed</p>
+                    {!skill.unlocked && skill.unlock_requirement ? <p className="mt-3 text-xs uppercase tracking-[0.2em] text-slate-500">{skill.unlock_requirement}</p> : null}
                   </div>
                 ))}
               </div>
@@ -140,6 +150,49 @@ export default function DashboardPage() {
               </div>
             </section>
           </div>
+
+          <section className="rounded-[30px] border border-white/10 bg-slate-950/60 p-6">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/75">Certification</p>
+                <h3 className="mt-2 text-2xl font-semibold text-white">
+                  {data.certificate.title ?? "PM90 Certified Product Manager"}
+                </h3>
+              </div>
+              {data.certificate.issued_at ? (
+                <p className="text-sm text-slate-400">Issued {new Date(data.certificate.issued_at).toLocaleDateString()}</p>
+              ) : null}
+            </div>
+            <div className="mt-5 grid gap-4 lg:grid-cols-[0.75fr_1.25fr]">
+              <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+                <p className="text-sm text-slate-400">Completion score</p>
+                <p className="mt-2 text-4xl font-semibold text-white">
+                  {data.certificate.completion_score !== null && data.certificate.completion_score !== undefined
+                    ? `${data.certificate.completion_score}%`
+                    : "In progress"}
+                </p>
+                <p className="mt-3 text-sm text-slate-300">
+                  {data.certificate.issued
+                    ? "You have completed the full 90-day journey and earned the PM90 certificate."
+                    : "Certification unlocks automatically when every day in the program is completed in sequence."}
+                </p>
+              </div>
+              <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+                <p className="text-sm text-slate-400">Portfolio highlights</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {data.certificate.portfolio_highlights.length ? (
+                    data.certificate.portfolio_highlights.map((item) => (
+                      <span key={item} className="rounded-full border border-white/10 px-3 py-2 text-xs text-slate-200">
+                        {item}
+                      </span>
+                    ))
+                  ) : (
+                    <p className="text-sm text-slate-300">Generate PRDs, roadmaps, personas, and simulations to strengthen the final certificate package.</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section className="rounded-[30px] border border-white/10 bg-slate-950/60 p-6">
             <div className="flex items-center justify-between">

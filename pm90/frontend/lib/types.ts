@@ -27,6 +27,9 @@ export type SkillNode = {
   completed_days: number;
   total_days: number;
   progress_percent: number;
+  current_level: number;
+  unlocked: boolean;
+  unlock_requirement?: string | null;
 };
 
 export type DaySummary = {
@@ -74,6 +77,23 @@ export type DashboardSummary = {
     xp_balance: number;
     current_level: number;
   }>;
+  certificate: {
+    eligible: boolean;
+    issued: boolean;
+    title?: string | null;
+    completion_score?: number | null;
+    issued_at?: string | null;
+    certificate_artifact_id?: number | null;
+    portfolio_highlights: string[];
+  };
+};
+
+export type DailyCompletionResult = {
+  status: string;
+  xp_balance: number;
+  current_level: number;
+  unlocked_badges: string[];
+  certificate_awarded: boolean;
 };
 
 export type MentorResponse = {

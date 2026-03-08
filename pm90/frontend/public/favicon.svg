@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="PM90">
+  <defs>
+    <linearGradient id="pm90-favicon-gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#3cc8ff" />
+      <stop offset="100%" stop-color="#4ce2c6" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#06111f" />
+  <path d="M28 92V36h24c17 0 28 9 28 24s-11 24-28 24H42v8Zm14-20h9c9 0 15-4 15-12s-6-12-15-12h-9Z" fill="url(#pm90-favicon-gradient)" />
+  <path d="M86 92V36h14v56Z" fill="#edf4ff" opacity="0.92" />
+</svg>

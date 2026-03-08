@@ -12,10 +12,10 @@ PM90 is an AI-powered, gamified learning and productivity platform for aspiring 
 ## Core capabilities
 
 - 90-day curriculum with six phases and sequential unlocking
-- XP, levels, streaks, badges, leaderboard, and skill-tree progress
+- XP, levels, streaks, badges, leaderboard, certification, and progressive skill-tree unlocks
 - AI mentor for concept explanation, PRD review, challenge evaluation, and interview practice
 - PM simulation engine for churn, growth, prioritization, launch, and stakeholder scenarios
-- PRD, roadmap, and prioritization board generation with Markdown, PDF, and Notion-style export
+- PRD, roadmap, persona, north-star metric, prioritization board, and custom portfolio artifact generation with Markdown, PDF, and Notion-style export
 - Product analytics playground with funnels, cohorts, retention, A/B testing, and sample event data
 - Community board, weekly challenges, and public progress feed
 - Portfolio dashboard for saved PM artifacts
@@ -26,9 +26,16 @@ PM90 is an AI-powered, gamified learning and productivity platform for aspiring 
 pm90/
   backend/        FastAPI API, data model, seed content, AI service layer
   frontend/       Next.js product UI
+  docs/           Architecture, setup, and deployment documentation
   docker-compose.yml
   .env.example
 ```
+
+## Documentation
+
+- Setup guide: [docs/setup.md](docs/setup.md)
+- Architecture diagram: [docs/architecture.md](docs/architecture.md)
+- Deployment guide: [docs/deployment.md](docs/deployment.md)
 
 ## Demo account
 
@@ -42,11 +49,12 @@ The backend seeds this demo user on startup by default so the product opens with
 ### 1. Backend
 
 ```bash
-cd /Users/user/Documents/New_project/pm90/backend
+cd pm90/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp ../.env.example .env
+alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
@@ -55,7 +63,7 @@ The backend runs at [http://localhost:8000](http://localhost:8000). Swagger docs
 ### 2. Frontend
 
 ```bash
-cd /Users/user/Documents/New_project/pm90/frontend
+cd pm90/frontend
 npm install
 cp ../.env.example .env.local
 npm run dev
@@ -66,7 +74,7 @@ The frontend runs at [http://localhost:3000](http://localhost:3000).
 ## Docker deployment
 
 ```bash
-cd /Users/user/Documents/New_project/pm90
+cd pm90
 cp .env.example .env
 docker compose up --build
 ```
@@ -84,7 +92,7 @@ Services:
 Vercel frontend:
 
 ```bash
-cd /Users/user/Documents/New_project/pm90
+cd pm90
 npx vercel link --cwd frontend
 npx vercel env add NEXT_PUBLIC_API_BASE_URL production --cwd frontend
 npx vercel env add NEXT_PUBLIC_API_BASE_URL preview --cwd frontend
@@ -100,7 +108,7 @@ https://pm90-api.onrender.com/api
 Render backend:
 
 ```bash
-cd /Users/user/Documents/New_project/pm90
+cd pm90
 render blueprints validate render.yaml
 ```
 
@@ -121,7 +129,7 @@ render deploys create <RENDER_SERVICE_ID> --wait
 ### Option 2: Docker-only deployment
 
 ```bash
-cd /Users/user/Documents/New_project/pm90
+cd pm90
 cp .env.example .env
 docker compose up --build -d
 docker compose ps
@@ -130,14 +138,14 @@ docker compose ps
 To stop it:
 
 ```bash
-cd /Users/user/Documents/New_project/pm90
+cd pm90
 docker compose down
 ```
 
 To rebuild after changes:
 
 ```bash
-cd /Users/user/Documents/New_project/pm90
+cd pm90
 docker compose up --build -d
 ```
 
@@ -173,17 +181,18 @@ docker compose up --build -d
 Backend:
 
 ```bash
-cd /Users/user/Documents/New_project/pm90/backend
+cd pm90/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+alembic upgrade head
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
 Frontend:
 
 ```bash
-cd /Users/user/Documents/New_project/pm90/frontend
+cd pm90/frontend
 npm install
 npm run dev -- --hostname 0.0.0.0 --port 3000
 ```
@@ -199,10 +208,10 @@ Open:
 - Demo user with initial progress, artifacts, and simulation history
 - Community leaderboard seed users and starter discussion posts
 - Resource hub and weekly challenge catalog
+- Certification artifact generation once all 90 days are completed
 
-## Next hardening steps
+## Current hardening gaps
 
-- Add Alembic migrations
 - Move auth to secure cookies and refresh tokens
 - Add rate limiting to AI endpoints
 - Add server-side analytics event ingestion

@@ -72,6 +72,23 @@ export default function CommunityPage() {
                 ))}
               </div>
             </div>
+            <div className="rounded-[30px] border border-white/10 bg-slate-950/55 p-6">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/75">Leaderboard</p>
+              <div className="mt-5 space-y-3">
+                {overview.leaderboard.map((entry, index) => (
+                  <div key={`${entry.name}-${index}`} className="flex items-center justify-between rounded-[22px] border border-white/10 bg-white/5 px-4 py-4">
+                    <div>
+                      <p className="font-medium text-white">{index + 1}. {entry.name}</p>
+                      <p className="text-sm text-slate-400">{entry.headline}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-medium text-cyan-100">{entry.xp_balance} XP</p>
+                      <p className="text-sm text-slate-400">Level {entry.current_level}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </section>
 
           <section className="space-y-6">

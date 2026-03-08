@@ -13,7 +13,7 @@ PHASE_LIBRARY: List[Dict] = [
     {
         "key": "foundations",
         "name": "Phase 1 Foundations",
-        "skill": "Product Foundations",
+        "skill": "Technical Foundations",
         "days": [
             ("What Product Managers Really Do", "Understand product management as a decision discipline rather than a feature factory."),
             ("Problem Framing", "Translate noisy stakeholder requests into sharp customer and business problems."),
@@ -35,7 +35,7 @@ PHASE_LIBRARY: List[Dict] = [
     {
         "key": "discovery",
         "name": "Phase 2 Product Discovery",
-        "skill": "Discovery",
+        "skill": "Product Discovery",
         "days": [
             ("Interview Planning", "Create interview plans that test the most important assumptions first."),
             ("Survey Design", "Write unbiased prompts that reveal signal rather than confirm assumptions."),
@@ -57,7 +57,7 @@ PHASE_LIBRARY: List[Dict] = [
     {
         "key": "delivery",
         "name": "Phase 3 Product Delivery",
-        "skill": "Delivery",
+        "skill": "Product Delivery",
         "days": [
             ("Roadmap Fundamentals", "Use roadmaps as communication tools for outcomes and sequencing."),
             ("PRD Anatomy", "Write PRDs that clarify decisions, constraints, and success metrics."),
@@ -79,7 +79,7 @@ PHASE_LIBRARY: List[Dict] = [
     {
         "key": "analytics",
         "name": "Phase 4 Product Analytics",
-        "skill": "Analytics",
+        "skill": "Product Analytics",
         "days": [
             ("Event Taxonomy", "Design event schemas that answer product questions cleanly."),
             ("Funnel Analysis", "Interpret drop-off points and identify what to test next."),
@@ -101,7 +101,7 @@ PHASE_LIBRARY: List[Dict] = [
     {
         "key": "strategy",
         "name": "Phase 5 Product Strategy",
-        "skill": "Strategy",
+        "skill": "Product Strategy",
         "days": [
             ("Strategic Context", "Connect product choices to market structure and company goals."),
             ("Vision to Roadmap", "Translate long-term intent into a believable path to value."),

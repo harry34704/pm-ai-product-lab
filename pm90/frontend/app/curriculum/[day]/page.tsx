@@ -41,7 +41,13 @@ export default function DayDetailPage() {
     setError("");
     try {
       const result = await api.completeDay(params.day, { reflection_response: reflection, challenge_answer: answer }, session.token);
-      setCompletionNote(`Lesson ${result.status}. XP: ${result.xp_balance}. Level: ${result.current_level}.`);
+      const extras = [
+        result.unlocked_badges.length ? `Badges: ${result.unlocked_badges.join(", ")}.` : "",
+        result.certificate_awarded ? "Certification awarded." : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+      setCompletionNote(`Lesson ${result.status}. XP: ${result.xp_balance}. Level: ${result.current_level}. ${extras}`.trim());
       const refreshed = await api.day(params.day, session.token);
       setDay(refreshed);
     } catch (err) {

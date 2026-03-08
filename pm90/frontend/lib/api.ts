@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 
 import type {
   AnalyticsPayload,
+  Artifact,
   CommunityOverview,
+  DailyCompletionResult,
   DashboardSummary,
   DayDetail,
   DaySummary,
@@ -70,7 +72,7 @@ export const api = {
   curriculum: (token: string) => request<DaySummary[]>("/curriculum", {}, token),
   day: (day: string, token: string) => request<DayDetail>(`/curriculum/${day}`, {}, token),
   completeDay: (day: string, payload: { reflection_response: string; challenge_answer: string }, token: string) =>
-    request<{ status: string; xp_balance: number; current_level: number; unlocked_badges: string[] }>(
+    request<DailyCompletionResult>(
       `/curriculum/${day}/complete`,
       { method: "POST", body: JSON.stringify(payload) },
       token,
@@ -91,14 +93,14 @@ export const api = {
       token,
     ),
   analytics: (token: string) => request<AnalyticsPayload>("/analytics/playground", {}, token),
-  artifacts: (token: string) => request<any[]>("/artifacts", {}, token),
+  artifacts: (token: string) => request<Artifact[]>("/artifacts", {}, token),
   createArtifact: (payload: Record<string, unknown>, token: string) =>
-    request<any>("/artifacts", { method: "POST", body: JSON.stringify(payload) }, token),
-  generateArtifact: (type: "prd" | "roadmap" | "prioritization", payload: Record<string, unknown>, token: string) =>
-    request<any>(`/artifacts/generate/${type}`, { method: "POST", body: JSON.stringify(payload) }, token),
+    request<Artifact>("/artifacts", { method: "POST", body: JSON.stringify(payload) }, token),
+  generateArtifact: (type: "prd" | "roadmap" | "prioritization" | "persona" | "north-star", payload: Record<string, unknown>, token: string) =>
+    request<Artifact>(`/artifacts/generate/${type}`, { method: "POST", body: JSON.stringify(payload) }, token),
   community: (token: string) => request<CommunityOverview>("/community/overview", {}, token),
   createPost: (payload: { topic: string; body: string }, token: string) =>
-    request<any>("/community/posts", { method: "POST", body: JSON.stringify(payload) }, token),
+    request<CommunityOverview["posts"][number]>("/community/posts", { method: "POST", body: JSON.stringify(payload) }, token),
   resources: () => request<ResourcePayload>("/resources"),
   exportArtifact: (artifactId: number, format: "markdown" | "notion" | "pdf", token: string) =>
     fetch(`${API_BASE_URL}/artifacts/${artifactId}/export?format=${format}`, {

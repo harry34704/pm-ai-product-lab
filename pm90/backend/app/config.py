@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     jwt_secret: str = "pm90-dev-secret-change-me"
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 60 * 24 * 7
-    cors_origins: str = "http://localhost:3000"
+    cors_origins: str = "http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001"
     ai_provider: str = "fallback"
     openai_api_key: str = ""
     openai_model: str = "gpt-4.1-mini"
@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     demo_user_email: str = "demo@pm90.app"
     demo_user_password: str = "Demo123!"
     demo_user_name: str = "PM90 Demo User"
-    frontend_base_url: str = "http://localhost:3000"
+    frontend_base_url: str = "http://localhost:3001"
     default_daily_xp: int = 80
     pdf_title: str = "PM90 Export"
     model_config = SettingsConfigDict(

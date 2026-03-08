@@ -7,6 +7,7 @@ from app.auth import get_current_user
 from app.database import get_db
 from app.models import Artifact, DailyProgress, DayContent, SimulationAttempt, User
 from app.schemas import ArtifactResponse, DashboardResponse
+from app.services.certification import build_certificate_summary, ensure_certificate_artifact
 from app.services.gamification import build_leaderboard, build_phase_progress, build_skill_tree, calculate_streak, sync_badges
 from app.services.progress import get_next_unlocked_day
 
@@ -35,12 +36,14 @@ def dashboard_summary(current_user: User = Depends(get_current_user), db: Sessio
         .order_by(DailyProgress.completed_at.desc())
         .all()
     )
-    artifacts = db.query(Artifact).filter(Artifact.user_id == current_user.id).order_by(Artifact.created_at.desc()).limit(6).all()
+    artifacts = db.query(Artifact).filter(Artifact.user_id == current_user.id).order_by(Artifact.created_at.desc()).all()
     attempts = db.query(SimulationAttempt).filter(SimulationAttempt.user_id == current_user.id).all()
 
     sync_badges(db, current_user, days, progress_entries, artifacts, attempts)
+    ensure_certificate_artifact(db, current_user, days, progress_entries, artifacts, attempts)
     db.refresh(current_user)
     current_user = db.query(User).options(joinedload(User.badges)).filter(User.id == current_user.id).first()
+    artifacts = db.query(Artifact).filter(Artifact.user_id == current_user.id).order_by(Artifact.created_at.desc()).all()
 
     completed_ids = {entry.day.day_number for entry in progress_entries if entry.day}
     streak_count = calculate_streak(progress_entries)
@@ -63,11 +66,12 @@ def dashboard_summary(current_user: User = Depends(get_current_user), db: Sessio
         user=current_user,
         streak_count=streak_count,
         badges=current_user.badges,
-        skill_tree=build_skill_tree(days, completed_ids),
+        skill_tree=build_skill_tree(days, completed_ids, len(attempts)),
         phase_progress=build_phase_progress(days, completed_ids),
         next_day=next_day,
         completed_days=len(completed_ids),
         total_days=len(days),
-        artifacts=[serialize_artifact(artifact) for artifact in artifacts],
+        artifacts=[serialize_artifact(artifact) for artifact in artifacts[:6]],
         leaderboard=build_leaderboard(db),
+        certificate=build_certificate_summary(days, progress_entries, artifacts, attempts),
     )

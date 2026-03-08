@@ -8,6 +8,7 @@ from app.auth import get_current_user
 from app.database import get_db
 from app.models import Artifact, DailyProgress, DayContent, SimulationAttempt, User
 from app.schemas import DailyCompletionRequest, DailyCompletionResponse, DayDetail, DaySummary
+from app.services.certification import ensure_certificate_artifact
 from app.services.gamification import compute_level, sync_badges
 from app.services.progress import get_next_unlocked_day
 
@@ -100,8 +101,15 @@ def complete_day(
         progress_entries = list(progress_map.values())
         artifacts = db.query(Artifact).filter(Artifact.user_id == current_user.id).all()
         attempts = db.query(SimulationAttempt).filter(SimulationAttempt.user_id == current_user.id).all()
+        ensure_certificate_artifact(db, current_user, db.query(DayContent).all(), progress_entries, artifacts, attempts)
         unlocked = sync_badges(db, current_user, db.query(DayContent).all(), progress_entries, artifacts, attempts)
-        return DailyCompletionResponse(status="already-completed", xp_balance=current_user.xp_balance, current_level=current_user.current_level, unlocked_badges=unlocked)
+        return DailyCompletionResponse(
+            status="already-completed",
+            xp_balance=current_user.xp_balance,
+            current_level=current_user.current_level,
+            unlocked_badges=unlocked,
+            certificate_awarded=False,
+        )
 
     progress = DailyProgress(
         user_id=current_user.id,
@@ -127,11 +135,15 @@ def complete_day(
     )
     artifacts = db.query(Artifact).filter(Artifact.user_id == current_user.id).all()
     attempts = db.query(SimulationAttempt).filter(SimulationAttempt.user_id == current_user.id).all()
+    certificate_before = next((artifact for artifact in artifacts if artifact.kind == "certificate"), None)
     unlocked = sync_badges(db, current_user, db.query(DayContent).all(), progress_entries, artifacts, attempts)
+    artifacts = db.query(Artifact).filter(Artifact.user_id == current_user.id).all()
+    certificate = ensure_certificate_artifact(db, current_user, db.query(DayContent).all(), progress_entries, artifacts, attempts)
     db.refresh(current_user)
     return DailyCompletionResponse(
         status="completed",
         xp_balance=current_user.xp_balance,
         current_level=current_user.current_level,
         unlocked_badges=unlocked,
+        certificate_awarded=certificate is not None and certificate_before is None,
     )

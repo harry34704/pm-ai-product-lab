@@ -43,6 +43,9 @@ class SkillNode(BaseModel):
     completed_days: int
     total_days: int
     progress_percent: float
+    current_level: int
+    unlocked: bool
+    unlock_requirement: Optional[str] = None
 
 
 class PhaseProgress(BaseModel):
@@ -90,6 +93,7 @@ class DailyCompletionResponse(BaseModel):
     xp_balance: int
     current_level: int
     unlocked_badges: List[str]
+    certificate_awarded: bool = False
 
 
 class LeaderboardEntry(BaseModel):
@@ -211,6 +215,16 @@ class AnalyticsResponse(BaseModel):
     sample_events: List[Dict]
 
 
+class CertificateSummary(BaseModel):
+    eligible: bool
+    issued: bool
+    title: Optional[str] = None
+    completion_score: Optional[float] = None
+    issued_at: Optional[datetime] = None
+    certificate_artifact_id: Optional[int] = None
+    portfolio_highlights: List[str] = Field(default_factory=list)
+
+
 class DashboardResponse(BaseModel):
     user: UserSummary
     streak_count: int
@@ -222,3 +236,4 @@ class DashboardResponse(BaseModel):
     total_days: int
     artifacts: List[ArtifactResponse]
     leaderboard: List[LeaderboardEntry]
+    certificate: CertificateSummary
