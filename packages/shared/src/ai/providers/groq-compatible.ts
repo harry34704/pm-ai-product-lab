@@ -2,7 +2,7 @@ import { OpenAICompatibleProvider } from "./openai-compatible";
 import type { ProviderEnvironment } from "./base";
 
 export class GroqCompatibleProvider extends OpenAICompatibleProvider {
-  readonly id = "groq" as const;
+  override readonly id = "groq" as const;
 
   constructor(env: ProviderEnvironment) {
     super({

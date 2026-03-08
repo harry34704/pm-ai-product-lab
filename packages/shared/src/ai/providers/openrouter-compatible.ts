@@ -2,7 +2,7 @@ import { OpenAICompatibleProvider } from "./openai-compatible";
 import type { ProviderEnvironment } from "./base";
 
 export class OpenRouterCompatibleProvider extends OpenAICompatibleProvider {
-  readonly id = "openrouter" as const;
+  override readonly id = "openrouter" as const;
 
   constructor(env: ProviderEnvironment) {
     super({

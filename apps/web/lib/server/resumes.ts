@@ -55,7 +55,7 @@ export async function createResume(userId: string, input: { title?: string; orig
   return { resume, parsed };
 }
 
-export async function updateResume(userId: string, resumeId: string, input: { title: string; rawText: string; parsedJson: unknown }) {
+export async function updateResume(userId: string, resumeId: string, input: { title: string; rawText: string; parsedJson?: unknown }) {
   const parsed = parsedResumeSchema.parse(input.parsedJson);
 
   const existing = await db.resume.findFirst({

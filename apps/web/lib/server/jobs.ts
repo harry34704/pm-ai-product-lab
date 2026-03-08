@@ -20,7 +20,7 @@ export async function createJobDescription(userId: string, input: { title?: stri
 export async function updateJobDescription(
   userId: string,
   jobId: string,
-  input: { title: string; company?: string; rawText: string; parsedJson: unknown }
+  input: { title: string; company?: string; rawText: string; parsedJson?: unknown }
 ) {
   const parsed = parsedJobDescriptionSchema.parse(input.parsedJson);
 

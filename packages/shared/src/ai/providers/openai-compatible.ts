@@ -1,10 +1,11 @@
+import type { ProviderId } from "../../types";
 import type { z } from "zod";
 import { safeJsonParse } from "../../utils/json";
 import type { ChatMessage, ProviderCallOptions, ProviderHealth } from "../../types";
 import type { AIProvider, ProviderEnvironment } from "./base";
 
 export class OpenAICompatibleProvider implements AIProvider {
-  readonly id = "openai" as const;
+  readonly id: ProviderId = "openai";
 
   constructor(private readonly env: ProviderEnvironment) {}
 
@@ -58,7 +59,7 @@ export class OpenAICompatibleProvider implements AIProvider {
 
     const formData = new FormData();
     formData.append("model", options?.model ?? this.env.defaultModel ?? "whisper-1");
-    formData.append("file", new Blob([audio], { type: "audio/webm" }), "audio.webm");
+    formData.append("file", new Blob([Buffer.from(audio)], { type: "audio/webm" }), "audio.webm");
 
     const response = await fetch(`${this.env.baseUrl}/audio/transcriptions`, {
       method: "POST",

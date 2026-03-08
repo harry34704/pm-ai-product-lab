@@ -4,10 +4,10 @@
   "private": true,
   "main": "dist/main.js",
   "scripts": {
-    "dev": "wait-on tcp:3000 && cross-env ELECTRON_START_URL=http://localhost:3000 pnpm run build && electron dist/main.js",
+    "dev": "wait-on tcp:3000 && cross-env ELECTRON_START_URL=http://localhost:3000 npm run build && electron dist/main.js",
     "build": "tsup electron/main.ts electron/preload.ts --format cjs --out-dir dist --external electron",
     "lint": "tsc --noEmit",
-    "package": "pnpm run build && electron-builder"
+    "package": "npm run build && electron-builder"
   },
   "dependencies": {
     "electron": "^35.0.1"

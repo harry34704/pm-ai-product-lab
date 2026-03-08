@@ -1,0 +1,8 @@
+Product Manager
+Acme Cloud
+Responsibilities
+- Lead roadmap planning
+Required skills
+- SQL
+- Stakeholder management
+- Experimentation

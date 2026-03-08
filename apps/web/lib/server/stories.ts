@@ -52,13 +52,13 @@ export async function updateStory(userId: string, storyId: string, input: Record
     data: {
       title: String(input.title ?? story.title),
       category: (String(input.category ?? story.category).toUpperCase() as StoryCategory) ?? story.category,
-      tags: input.tags ?? story.tags,
+      tags: (input.tags as string[] | undefined) ?? (story.tags as string[]),
       scenario: String(input.scenario ?? story.scenario),
       task: String(input.task ?? story.task),
       action: String(input.action ?? story.action),
       result: String(input.result ?? story.result),
       evidence: String(input.evidence ?? story.evidence),
-      exampleQuestions: input.exampleQuestions ?? story.exampleQuestions
+      exampleQuestions: (input.exampleQuestions as string[] | undefined) ?? (story.exampleQuestions as string[])
     }
   });
 }

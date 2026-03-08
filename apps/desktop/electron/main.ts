@@ -1,6 +1,7 @@
 import { app, session } from "electron";
 import path from "node:path";
 import { fork } from "node:child_process";
+import { existsSync } from "node:fs";
 import { createMainWindow } from "./window";
 import { registerSystemHandlers } from "./ipc/system";
 import { registerFileHandlers } from "./ipc/files";
@@ -14,7 +15,7 @@ function resolveBundledServerPath() {
     path.join(process.resourcesPath, "web", "server.js")
   ];
 
-  return candidates.find((candidate) => candidate);
+  return candidates.find((candidate) => existsSync(candidate));
 }
 
 async function waitForUrl(url: string, timeoutMs = 20000) {

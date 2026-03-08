@@ -24,7 +24,7 @@ export function parseJob(rawText: string): ParsedJobDescription {
   const responsibilities = findSection(lines, /^responsibilities$/i, [/^required skills$/i, /^preferred skills$/i, /^tools/i, /^behavioral/i]);
   const requiredSkills = findSection(lines, /^required skills$/i, [/^preferred skills$/i, /^tools/i, /^behavioral/i]);
   const preferredSkills = findSection(lines, /^preferred skills$/i, [/^tools/i, /^behavioral/i]);
-  const toolsPlatforms = findSection(lines, /^tools|platforms$/i, [/^behavioral/i, /^keywords$/i]);
+  const toolsPlatforms = findSection(lines, /^(tools|platforms)$/i, [/^behavioral/i, /^keywords$/i]);
   const behavioralTraits = findSection(lines, /^behavioral traits$/i, [/^keywords$/i]);
   const keywordSource = [requiredSkills, preferredSkills, responsibilities, toolsPlatforms, behavioralTraits].flat().join(" ");
 

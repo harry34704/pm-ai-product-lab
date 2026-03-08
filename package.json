@@ -2,16 +2,20 @@
   "name": "mockroom-ai",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "packageManager": "pnpm@9.15.4",
   "scripts": {
-    "dev": "concurrently -k -n web,desktop \"pnpm --filter @mockroom/web dev\" \"pnpm --filter @mockroom/desktop dev\"",
-    "build": "turbo run build",
-    "lint": "turbo run lint",
+    "dev": "node scripts/ensure-env.mjs && concurrently -k -n web,desktop \"npm run dev --workspace @mockroom/web\" \"npm run dev --workspace @mockroom/desktop\"",
+    "build": "node scripts/ensure-env.mjs && npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "prisma:migrate": "prisma db push --skip-generate && prisma generate",
-    "prisma:seed": "tsx prisma/seed.ts",
-    "electron:build": "pnpm --filter @mockroom/shared build && pnpm --filter @mockroom/web build && pnpm --filter @mockroom/desktop package",
+    "prisma:migrate": "node scripts/ensure-env.mjs && prisma db push --skip-generate && prisma generate",
+    "prisma:seed": "node scripts/ensure-env.mjs && tsx prisma/seed.ts",
+    "electron:build": "node scripts/ensure-env.mjs && npm run build --workspace @mockroom/shared && npm run build --workspace @mockroom/web && npm run package --workspace @mockroom/desktop",
     "postinstall": "prisma generate"
   },
   "dependencies": {
