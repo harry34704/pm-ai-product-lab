@@ -84,6 +84,7 @@ In production, session cookies are `HttpOnly`, `SameSite=Lax`, `Secure`, and use
 ## Vercel Deployment
 
 The repository includes a root [vercel.json](/Users/user/Documents/New%20project/vercel.json) for monorepo installs and builds.
+There is also an app-local [apps/web/vercel.json](/Users/user/Documents/New%20project/apps/web/vercel.json) for projects whose Vercel Root Directory is `apps/web`.
 
 Recommended Vercel setup:
 
@@ -96,6 +97,8 @@ Recommended Vercel setup:
 - Storage: configure an S3 or Cloudflare R2 bucket with CORS allowing `PUT` from your deployed domain
 
 Use the default `*.vercel.app` URL first and attach your custom domain later.
+
+A full deployment walkthrough is in [docs/VERCEL.md](/Users/user/Documents/New%20project/docs/VERCEL.md).
 
 ## Electron Dev Mode
 
@@ -141,5 +144,6 @@ After seeding, these demo accounts are available:
 
 - [Architecture](docs/architecture.md)
 - [Setup](docs/SETUP.md)
+- [Vercel](docs/VERCEL.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Ethics](docs/ETHICS.md)

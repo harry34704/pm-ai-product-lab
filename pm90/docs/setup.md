@@ -2,6 +2,16 @@
 
 ## Quick start
 
+### Fastest option for macOS
+
+1. Install Docker Desktop.
+2. In Finder, double-click `start-pm90.command`.
+3. Wait for PM90 to open in your browser.
+
+Use `stop-pm90.command` when you want to shut it down.
+
+### Manual option
+
 1. Copy the sample environment file.
 2. Start the backend, run migrations, then start the frontend.
 3. Log in with the seeded demo account.

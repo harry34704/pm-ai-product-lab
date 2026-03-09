@@ -9,6 +9,7 @@ export function TopNav() {
   const [pending, setPending] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const pageLabel = pathname.replace(/[-/]/g, " ").trim() || "dashboard";
 
   async function logout() {
     setPending(true);
@@ -21,7 +22,7 @@ export function TopNav() {
     <header className="flex items-center justify-between border-b border-border/70 bg-slate-950/45 px-4 py-4 backdrop-blur sm:px-6 lg:px-8">
       <div>
         <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Practice Mode</p>
-        <p className="mt-1 font-display text-xl font-semibold capitalize">{pathname.replace(/\//g, " ").trim() || "dashboard"}</p>
+        <p className="mt-1 font-display text-xl font-semibold capitalize">{pageLabel}</p>
       </div>
       <div className="flex items-center gap-3">
         <div className="hidden items-center gap-2 rounded-full border border-border bg-slate-900/80 px-3 py-2 text-xs text-slate-400 md:flex">

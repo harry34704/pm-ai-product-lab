@@ -1,4 +1,6 @@
 .env
+.env.localapp
+.pm90-launch.log
 backend/.env
 backend/.venv/
 backend/__pycache__/

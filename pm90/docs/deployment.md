@@ -14,6 +14,8 @@ Services:
 - Backend API: `http://localhost:8000`
 - Postgres: `localhost:5432`
 
+On macOS, you can skip Terminal entirely and double-click `start-pm90.command`. The launcher writes a local `.env.localapp`, starts Docker Compose, and opens the correct browser URL automatically.
+
 ## Local non-Docker development
 
 Backend:

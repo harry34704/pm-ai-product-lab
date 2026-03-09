@@ -1,8 +1,10 @@
 "use client";
 
 export function useDesktopFileDialog() {
+  const isDesktopBridgeAvailable = typeof window !== "undefined" && Boolean(window.mockroom?.files.openFileDialog);
+
   async function openFileDialog(extensions: string[]) {
-    if (!window.mockroom?.files.openFileDialog) {
+    if (!isDesktopBridgeAvailable || !window.mockroom?.files.openFileDialog) {
       return null;
     }
 
@@ -17,5 +19,5 @@ export function useDesktopFileDialog() {
     });
   }
 
-  return { openFileDialog, isDesktopBridgeAvailable: Boolean(window.mockroom?.files.openFileDialog) };
+  return { openFileDialog, isDesktopBridgeAvailable };
 }

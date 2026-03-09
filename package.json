@@ -16,9 +16,12 @@
     "db:start": "docker compose -f docker-compose.postgres.yml up -d",
     "db:stop": "docker compose -f docker-compose.postgres.yml down -v",
     "prisma:migrate": "node scripts/ensure-env.mjs && prisma migrate deploy",
+    "prisma:deploy": "node scripts/ensure-env.mjs && prisma migrate deploy",
     "prisma:dev": "node scripts/ensure-env.mjs && prisma migrate dev",
     "prisma:seed": "node scripts/ensure-env.mjs && tsx prisma/seed.ts",
     "electron:build": "node scripts/ensure-env.mjs && npm run build --workspace @mockroom/shared && npm run build --workspace @mockroom/web && npm run package --workspace @mockroom/desktop",
+    "vercel:build": "pnpm --filter @mockroom/shared build && pnpm --filter @mockroom/web vercel-build",
+    "vercel:check": "node scripts/check-production-env.mjs",
     "postinstall": "prisma generate"
   },
   "dependencies": {

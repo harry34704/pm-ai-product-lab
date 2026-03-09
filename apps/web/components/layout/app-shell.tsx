@@ -5,13 +5,19 @@ import { AppSidebar } from "./sidebar";
 import { TopNav } from "./top-nav";
 
 const AUTH_ROUTES = ["/login", "/register"];
+const STANDALONE_ROUTES = ["/customer-adoption"];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthPage = AUTH_ROUTES.includes(pathname);
+  const isStandalonePage = STANDALONE_ROUTES.includes(pathname);
 
   if (isAuthPage) {
     return <main className="grid min-h-screen place-items-center p-6">{children}</main>;
+  }
+
+  if (isStandalonePage) {
+    return <main className="min-h-screen p-0">{children}</main>;
   }
 
   return (

@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FileText, Briefcase, SearchCheck, BookOpenText, Users, History, Settings, UserCircle2 } from "lucide-react";
+import { LayoutDashboard, BarChart3, FileText, Briefcase, SearchCheck, BookOpenText, Users, History, Settings, UserCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/customer-adoption", label: "Customer Adoption", icon: BarChart3 },
   { href: "/resumes", label: "Resumes", icon: FileText },
   { href: "/jobs", label: "Jobs", icon: Briefcase },
   { href: "/story-bank", label: "Story Bank", icon: BookOpenText },

@@ -45,6 +45,23 @@ pm90/
 
 The backend seeds this demo user on startup by default so the product opens with realistic data immediately.
 
+## One-click launch on macOS
+
+If you want PM90 to behave like an app instead of a terminal project:
+
+1. Install and open Docker Desktop once.
+2. In Finder, open `start-pm90.command`.
+3. Wait for your browser to open automatically.
+
+The launcher will:
+
+- start Docker Desktop if needed
+- choose free local ports automatically
+- build and start the full stack
+- open PM90 in your browser
+
+To stop it later, open `stop-pm90.command`.
+
 ## Local development
 
 ### 1. Backend
@@ -85,6 +102,8 @@ Services:
 - Frontend: [http://localhost:3000](http://localhost:3000)
 - Backend API: [http://localhost:8000](http://localhost:8000)
 - Postgres: `localhost:5432`
+
+If you prefer not to use Terminal, double-click `start-pm90.command` instead.
 
 ## Exact deploy commands
 
