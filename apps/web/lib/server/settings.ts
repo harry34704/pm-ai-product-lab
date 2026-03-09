@@ -1,12 +1,14 @@
 import { ProviderRouter } from "@mockroom/shared";
 import { db } from "../db";
+import { getDefaultModel, getDefaultProviderPriority, getRuntimeFeatureStatus } from "../config";
+import { deleteStoredObjects, getObjectStorageHealth } from "../object-storage";
 
 const defaultSettings = {
-  aiProviderPriority: ["mock", "openai", "groq", "openrouter", "ollama"],
-  defaultModel: "mock-1",
+  aiProviderPriority: getDefaultProviderPriority(),
+  defaultModel: getDefaultModel(),
   transcriptionProvider: "browser",
   coachingLevel: "balanced",
-  localOnlyMode: true,
+  localOnlyMode: false,
   storeAudio: false,
   darkMode: true
 };
@@ -50,6 +52,19 @@ export async function updateSettings(userId: string, input: Partial<typeof defau
 }
 
 export async function deleteUserData(userId: string) {
+  const [resumes, jobs] = await Promise.all([
+    db.resume.findMany({
+      where: { userId },
+      select: { storageKey: true }
+    }),
+    db.jobDescription.findMany({
+      where: { userId },
+      select: { storageKey: true }
+    })
+  ]);
+
+  await deleteStoredObjects([...resumes.map((item) => item.storageKey ?? ""), ...jobs.map((item) => item.storageKey ?? "")]);
+
   await db.feedbackReport.deleteMany({
     where: {
       session: {
@@ -117,7 +132,18 @@ export async function getProviderStatus(userId: string) {
   const router = new ProviderRouter({
     priority: (settings.aiProviderPriority as string[]) as ("mock" | "openai" | "groq" | "openrouter" | "ollama")[]
   });
+  const runtime = getRuntimeFeatureStatus();
 
-  const health = await router.healthCheck();
-  return { settings, health };
+  const [health, objectStorage] = await Promise.all([router.healthCheck(), getObjectStorageHealth()]);
+  return {
+    settings,
+    health,
+    runtime: {
+      ...runtime,
+      storage: {
+        ...runtime.storage,
+        health: objectStorage.detail
+      }
+    }
+  };
 }

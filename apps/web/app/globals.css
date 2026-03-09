@@ -18,7 +18,7 @@ body {
   min-height: 100vh;
   color: hsl(214 27% 96%);
   background: transparent;
-  font-family: var(--font-ibm-plex-sans), sans-serif;
+  font-family: "IBM Plex Sans", "Aptos", "Segoe UI", sans-serif;
 }
 
 * {

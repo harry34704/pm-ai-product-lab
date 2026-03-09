@@ -14,10 +14,12 @@ build/
 node_modules/
 .turbo/
 .next/
+.vercel/
 coverage/
 playwright-report/
 test-results/
 apps/desktop/dist/
+apps/desktop/release/
 apps/web/.next/
 apps/web/uploads/
 prisma/mockroom.db

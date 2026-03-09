@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
-export function ProviderPriorityForm({ settings, health }: { settings: any; health: any[] }) {
+export function ProviderPriorityForm({ settings, health, runtime }: { settings: any; health: any[]; runtime: any }) {
   const [priority, setPriority] = useState((settings.aiProviderPriority as string[]).join(","));
   const [pending, setPending] = useState(false);
 
@@ -43,6 +43,9 @@ export function ProviderPriorityForm({ settings, health }: { settings: any; heal
               {provider.provider}: {provider.detail}
             </p>
           ))}
+          <p className="mt-3">storage: {runtime.storage.configured ? `${runtime.storage.provider} (${runtime.storage.health})` : "not configured"}</p>
+          <p>realtime: {runtime.realtime.configured ? runtime.realtime.livekitUrl : "LiveKit env vars missing"}</p>
+          <p>auth cookie: {runtime.auth.cookieName}</p>
         </div>
         <Button onClick={save} disabled={pending}>
           {pending ? "Saving..." : "Save priority"}

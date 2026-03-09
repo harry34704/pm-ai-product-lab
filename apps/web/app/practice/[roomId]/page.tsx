@@ -3,9 +3,10 @@ import { db } from "@/lib/db";
 import { PageHeader } from "@/components/layout/page-header";
 import { PracticeRoomScreen } from "@/components/practice/practice-room-screen";
 
-export default async function PracticeRoomPage({ params }: { params: { roomId: string } }) {
+export default async function PracticeRoomPage({ params }: { params: Promise<{ roomId: string }> }) {
+  const { roomId } = await params;
   const room = await db.practiceRoom.findUnique({
-    where: { id: params.roomId },
+    where: { id: roomId },
     include: {
       participants: {
         orderBy: { joinedAt: "asc" }
@@ -30,7 +31,7 @@ export default async function PracticeRoomPage({ params }: { params: { roomId: s
   return (
     <div className="space-y-6">
       <PageHeader eyebrow="Practice Room" title={room.title} description={`Room code ${room.roomCode}. This room is for visible rehearsal only.`} badge={room.status} />
-      <PracticeRoomScreen roomId={params.roomId} initialRoom={room} />
+      <PracticeRoomScreen roomId={roomId} initialRoom={room} />
     </div>
   );
 }

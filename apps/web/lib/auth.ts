@@ -4,14 +4,10 @@ import { redirect } from "next/navigation";
 import { compare, hash } from "bcryptjs";
 import { db } from "./db";
 
-const COOKIE_NAME = "mockroom_session";
-
-function getSecret() {
-  return process.env.APP_ENCRYPTION_KEY || process.env.NEXTAUTH_SECRET || "mockroom-local-dev-secret";
-}
+import { getAuthSecret, getSessionCookieConfig } from "./config";
 
 function sign(payload: string) {
-  return createHmac("sha256", getSecret()).update(payload).digest("hex");
+  return createHmac("sha256", getAuthSecret()).update(payload).digest("hex");
 }
 
 export async function hashPassword(password: string) {
@@ -49,12 +45,23 @@ export function verifySessionToken(token: string | undefined | null) {
     return null;
   }
 
+  const issuedAt = Number(timestamp);
+  const { ttlSeconds } = getSessionCookieConfig();
+
+  if (!Number.isFinite(issuedAt)) {
+    return null;
+  }
+
+  if (Date.now() - issuedAt > ttlSeconds * 1000) {
+    return null;
+  }
+
   return { userId };
 }
 
 export async function getCurrentUser() {
   const cookieStore = await cookies();
-  const token = cookieStore.get(COOKIE_NAME)?.value;
+  const token = cookieStore.get(getSessionCookieConfig().name)?.value;
   const session = verifySessionToken(token);
 
   if (!session) {
@@ -92,22 +99,15 @@ export async function requirePageUser() {
 
 export async function setSessionCookie(userId: string) {
   const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, createSessionToken(userId), {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 14
-  });
+  const cookie = getSessionCookieConfig();
+  cookieStore.set(cookie.name, createSessionToken(userId), cookie.options);
 }
 
 export async function clearSessionCookie() {
   const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, "", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
+  const cookie = getSessionCookieConfig();
+  cookieStore.set(cookie.name, "", {
+    ...cookie.options,
     maxAge: 0
   });
 }

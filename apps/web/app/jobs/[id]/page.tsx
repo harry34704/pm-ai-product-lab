@@ -4,11 +4,12 @@ import { db } from "@/lib/db";
 import { PageHeader } from "@/components/layout/page-header";
 import { JDEditor } from "@/components/jobs/jd-editor";
 
-export default async function JobDetailPage({ params }: { params: { id: string } }) {
+export default async function JobDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requirePageUser();
+  const { id } = await params;
   const job = await db.jobDescription.findFirst({
     where: {
-      id: params.id,
+      id,
       userId: user.id
     }
   });

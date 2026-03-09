@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum ResumeSectionType {
@@ -87,6 +88,12 @@ model Resume {
   userId           String
   title            String
   originalFileName String?
+  sourceMimeType   String?
+  fileSizeBytes    Int?
+  storageProvider  String?
+  storageBucket    String?
+  storageKey       String?
+  storageUrl       String?
   rawText          String
   parsedJson       Json
   createdAt        DateTime        @default(now())
@@ -115,6 +122,13 @@ model JobDescription {
   userId          String
   title           String
   company         String?
+  originalFileName String?
+  sourceMimeType   String?
+  fileSizeBytes    Int?
+  storageProvider  String?
+  storageBucket    String?
+  storageKey       String?
+  storageUrl       String?
   rawText         String
   parsedJson      Json
   createdAt       DateTime         @default(now())

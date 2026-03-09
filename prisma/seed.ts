@@ -1,5 +1,5 @@
 import { PrismaClient, ResumeSectionType, StoryCategory, PracticeRoomStatus, ParticipantRole, SessionStatus } from "@prisma/client";
-import { hashSync } from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -79,7 +79,7 @@ async function main() {
   await prisma.profile.deleteMany();
   await prisma.user.deleteMany();
 
-  const passwordHash = hashSync("Password123!", 10);
+  const passwordHash = bcrypt.hashSync("Password123!", 10);
 
   const pmUser = await prisma.user.create({
     data: {

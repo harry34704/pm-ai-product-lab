@@ -2,12 +2,13 @@ import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { fail, ok } from "@/lib/http";
 
-export async function GET(_request: Request, { params }: { params: { id: string } }) {
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const user = await requireUser();
+    const { id } = await params;
     const session = await db.session.findFirst({
       where: {
-        id: params.id,
+        id,
         candidateUserId: user.id
       },
       include: {

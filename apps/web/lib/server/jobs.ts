@@ -1,7 +1,21 @@
 import { parseJob, parsedJobDescriptionSchema } from "@mockroom/shared";
 import { db } from "../db";
 
-export async function createJobDescription(userId: string, input: { title?: string; company?: string; rawText: string }) {
+export async function createJobDescription(
+  userId: string,
+  input: {
+    title?: string;
+    company?: string;
+    originalFileName?: string;
+    sourceMimeType?: string;
+    fileSizeBytes?: number;
+    storageProvider?: string;
+    storageBucket?: string;
+    storageKey?: string;
+    storageUrl?: string | null;
+    rawText: string;
+  }
+) {
   const parsed = parseJob(input.rawText);
 
   const job = await db.jobDescription.create({
@@ -9,6 +23,13 @@ export async function createJobDescription(userId: string, input: { title?: stri
       userId,
       title: input.title?.trim() || parsed.roleTitle || "Untitled Job Description",
       company: input.company?.trim() || parsed.company || null,
+      originalFileName: input.originalFileName ?? null,
+      sourceMimeType: input.sourceMimeType ?? null,
+      fileSizeBytes: input.fileSizeBytes ?? null,
+      storageProvider: input.storageProvider ?? null,
+      storageBucket: input.storageBucket ?? null,
+      storageKey: input.storageKey ?? null,
+      storageUrl: input.storageUrl ?? null,
       rawText: input.rawText,
       parsedJson: parsed
     }

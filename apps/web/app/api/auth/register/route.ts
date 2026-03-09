@@ -2,6 +2,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { fail, ok } from "@/lib/http";
 import { hashPassword, setSessionCookie } from "@/lib/auth";
+import { getDefaultModel, getDefaultProviderPriority } from "@/lib/config";
 
 const schema = z.object({
   email: z.string().email(),
@@ -28,11 +29,11 @@ export async function POST(request: Request) {
         },
         settings: {
           create: {
-            aiProviderPriority: ["mock", "openai", "groq", "openrouter", "ollama"],
-            defaultModel: "mock-1",
+            aiProviderPriority: getDefaultProviderPriority(),
+            defaultModel: getDefaultModel(),
             transcriptionProvider: "browser",
             coachingLevel: "balanced",
-            localOnlyMode: true,
+            localOnlyMode: false,
             storeAudio: false,
             darkMode: true
           }

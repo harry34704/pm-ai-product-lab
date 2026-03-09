@@ -6,11 +6,12 @@ import { SessionSummaryCard } from "@/components/sessions/session-summary-card";
 import { QuestionReviewAccordion } from "@/components/sessions/question-review-accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default async function SessionDetailPage({ params }: { params: { id: string } }) {
+export default async function SessionDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requirePageUser();
+  const { id } = await params;
   const session = await db.session.findFirst({
     where: {
-      id: params.id,
+      id,
       candidateUserId: user.id
     },
     include: {

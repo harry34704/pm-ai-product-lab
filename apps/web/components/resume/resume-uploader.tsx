@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useDesktopFileDialog } from "@/hooks/use-desktop-file-dialog";
+import { uploadFileToObjectStorage } from "@/lib/client-upload";
 
 export function ResumeUploader() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -17,20 +18,46 @@ export function ResumeUploader() {
 
   async function uploadFile(file: File) {
     setPending(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    const response = await fetch("/api/resumes/upload", { method: "POST", body: formData });
-    const payload = await response.json();
-    setPending(false);
+    try {
+      const upload = await uploadFileToObjectStorage(file, "resume");
+      let response: Response;
 
-    if (!response.ok) {
-      toast.error(payload.error ?? "Resume upload failed.");
-      return;
+      if (upload) {
+        response = await fetch("/api/resumes/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            storageKey: upload.key,
+            originalFileName: file.name,
+            mimeType: file.type || "application/octet-stream",
+            fileSizeBytes: file.size,
+            storageProvider: upload.storageProvider,
+            storageBucket: upload.storageBucket,
+            storageUrl: upload.storageUrl
+          })
+        });
+      } else {
+        const formData = new FormData();
+        formData.append("file", file);
+        response = await fetch("/api/resumes/upload", { method: "POST", body: formData });
+      }
+      const payload = await response.json();
+      setPending(false);
+
+      if (!response.ok) {
+        toast.error(payload.error ?? "Resume upload failed.");
+        return;
+      }
+
+      toast.success("Resume uploaded.");
+      router.push(`/resumes/${payload.resume.id}`);
+      router.refresh();
+    } catch (error) {
+      setPending(false);
+      toast.error(error instanceof Error ? error.message : "Resume upload failed.");
     }
-
-    toast.success("Resume uploaded.");
-    router.push(`/resumes/${payload.resume.id}`);
-    router.refresh();
   }
 
   async function onDesktopDialog() {

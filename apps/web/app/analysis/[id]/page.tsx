@@ -8,11 +8,12 @@ import { IntroGeneratorCard } from "@/components/analysis/intro-generator-card";
 import { LikelyQuestionsCard } from "@/components/analysis/likely-questions-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default async function AnalysisDetailPage({ params }: { params: { id: string } }) {
+export default async function AnalysisDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requirePageUser();
+  const { id } = await params;
   const report = await db.analysisReport.findFirst({
     where: {
-      id: params.id,
+      id,
       userId: user.id
     },
     include: {

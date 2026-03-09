@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { uploadFileToObjectStorage } from "@/lib/client-upload";
 
 export function JDUploader() {
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -38,21 +39,50 @@ export function JDUploader() {
 
   async function uploadFile(file: File) {
     setPending(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("title", title);
-    formData.append("company", company);
-    const response = await fetch("/api/jobs/parse", { method: "POST", body: formData });
-    const payload = await response.json();
-    setPending(false);
+    try {
+      const upload = await uploadFileToObjectStorage(file, "job");
+      let response: Response;
 
-    if (!response.ok) {
-      toast.error(payload.error ?? "Could not parse job description.");
-      return;
+      if (upload) {
+        response = await fetch("/api/jobs/parse", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title,
+            company,
+            storageKey: upload.key,
+            originalFileName: file.name,
+            mimeType: file.type || "application/octet-stream",
+            fileSizeBytes: file.size,
+            storageProvider: upload.storageProvider,
+            storageBucket: upload.storageBucket,
+            storageUrl: upload.storageUrl
+          })
+        });
+      } else {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("title", title);
+        formData.append("company", company);
+        response = await fetch("/api/jobs/parse", { method: "POST", body: formData });
+      }
+      const payload = await response.json();
+      setPending(false);
+
+      if (!response.ok) {
+        toast.error(payload.error ?? "Could not parse job description.");
+        return;
+      }
+
+      toast.success("Job description saved.");
+      router.push(`/jobs/${payload.job.id}`);
+      router.refresh();
+    } catch (error) {
+      setPending(false);
+      toast.error(error instanceof Error ? error.message : "Could not parse job description.");
     }
-
-    router.push(`/jobs/${payload.job.id}`);
-    router.refresh();
   }
 
   return (

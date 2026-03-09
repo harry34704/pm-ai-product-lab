@@ -1,0 +1,57 @@
+name: Desktop Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            artifact_name: mockroom-desktop-macos
+          - os: windows-latest
+            artifact_name: mockroom-desktop-windows
+    runs-on: ${{ matrix.os }}
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/mockroom_release?schema=public
+      DIRECT_URL: postgresql://postgres:postgres@127.0.0.1:5432/mockroom_release?schema=public
+      NEXTAUTH_SECRET: release-secret-release-secret-release-secret
+      NEXTAUTH_URL: https://mockroom.example.com
+      APP_BASE_URL: https://mockroom.example.com
+      APP_ENCRYPTION_KEY: release-secret-release-secret-release-secret
+      AI_PROVIDER_PRIORITY: mock
+      TRANSCRIPTION_PROVIDER: browser
+      CSC_LINK: ${{ secrets.CSC_LINK }}
+      CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+      WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+      WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+      APPLE_ID: ${{ secrets.APPLE_ID }}
+      APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build shared package
+        run: pnpm --filter @mockroom/shared build
+      - name: Build web package
+        run: pnpm --filter @mockroom/web build
+      - name: Package desktop app
+        run: pnpm --filter @mockroom/desktop package
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: apps/desktop/release/**

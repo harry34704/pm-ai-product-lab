@@ -4,11 +4,12 @@ import { db } from "@/lib/db";
 import { PageHeader } from "@/components/layout/page-header";
 import { ResumeEditor } from "@/components/resume/resume-editor";
 
-export default async function ResumeDetailPage({ params }: { params: { id: string } }) {
+export default async function ResumeDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requirePageUser();
+  const { id } = await params;
   const resume = await db.resume.findFirst({
     where: {
-      id: params.id,
+      id,
       userId: user.id
     }
   });

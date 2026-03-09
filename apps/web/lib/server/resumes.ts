@@ -33,7 +33,20 @@ function resumeSectionsFromParsed(parsed: ReturnType<typeof parseResume>) {
   return sections;
 }
 
-export async function createResume(userId: string, input: { title?: string; originalFileName?: string; rawText: string }) {
+export async function createResume(
+  userId: string,
+  input: {
+    title?: string;
+    originalFileName?: string;
+    sourceMimeType?: string;
+    fileSizeBytes?: number;
+    storageProvider?: string;
+    storageBucket?: string;
+    storageKey?: string;
+    storageUrl?: string | null;
+    rawText: string;
+  }
+) {
   const parsed = parseResume(input.rawText);
 
   const resume = await db.resume.create({
@@ -41,6 +54,12 @@ export async function createResume(userId: string, input: { title?: string; orig
       userId,
       title: input.title?.trim() || parsed.headline || "Untitled Resume",
       originalFileName: input.originalFileName,
+      sourceMimeType: input.sourceMimeType ?? null,
+      fileSizeBytes: input.fileSizeBytes ?? null,
+      storageProvider: input.storageProvider ?? null,
+      storageBucket: input.storageBucket ?? null,
+      storageKey: input.storageKey ?? null,
+      storageUrl: input.storageUrl ?? null,
       rawText: input.rawText,
       parsedJson: parsed,
       sections: {

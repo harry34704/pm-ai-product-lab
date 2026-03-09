@@ -21,8 +21,8 @@ const config: Config = {
         danger: "hsl(1 70% 55%)"
       },
       fontFamily: {
-        display: ["var(--font-space-grotesk)", "sans-serif"],
-        body: ["var(--font-ibm-plex-sans)", "sans-serif"]
+        display: ["Avenir Next", "Segoe UI", "sans-serif"],
+        body: ["IBM Plex Sans", "Aptos", "Segoe UI", "sans-serif"]
       },
       boxShadow: {
         glow: "0 10px 60px rgba(6, 182, 212, 0.16)"

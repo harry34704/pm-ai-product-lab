@@ -9,11 +9,12 @@ const schema = z.object({
   parsedJson: z.unknown()
 });
 
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const user = await requireUser();
+    const { id } = await params;
     const input = schema.parse(await request.json());
-    const resume = await updateResume(user.id, params.id, input);
+    const resume = await updateResume(user.id, id, input);
     return ok({ resume });
   } catch (error) {
     if (error instanceof Error && error.message === "UNAUTHORIZED") {
